@@ -1,0 +1,22 @@
+[workspace]
+
+[package]
+name = "wigigadict-asr-benchmark"
+version = "0.0.1"
+edition = "2024"
+license = "MIT"
+publish = false
+
+[features]
+default = []
+whisper-cpu = ["dep:transcribe-rs", "transcribe-rs/whisper-cpp"]
+whisper-vulkan = ["dep:transcribe-rs", "transcribe-rs/whisper-vulkan"]
+gigaam-cpu = ["dep:transcribe-rs", "transcribe-rs/onnx"]
+gigaam-directml = ["dep:transcribe-rs", "transcribe-rs/ort-directml"]
+
+[dependencies]
+serde = { version = "=1.0.228", features = ["derive"] }
+serde_json = "=1.0.145"
+sha2 = "=0.10.9"
+transcribe-rs = { version = "=0.3.11", optional = true, default-features = false }
+webrtc-vad = "=0.4.0"

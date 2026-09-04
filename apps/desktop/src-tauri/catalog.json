@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "catalog_version": 2,
+  "generated_at_ms": 1788000000000,
+  "signature_key_id": "wigigadict-catalog-v1",
+  "entries": [
+    {
+      "display_name": "Whisper large-v3-turbo Q5",
+      "summary": "Единственная модель, качество которой измерено на этом проекте (ADR-006). Требует видеокарту с Vulkan; пик памяти измерен — 626 МБ.",
+      "languages": [
+        "multi"
+      ],
+      "requirements": {
+        "device_kind": "vulkan",
+        "min_ram_mb": 1536,
+        "min_vram_mb": 1024
+      },
+      "recommended": true,
+      "owner_measured": true,
+      "manifest_json": "{\"schema_version\":1,\"package_id\":\"whisper-large-v3-turbo-q5-vulkan-catalog\",\"engine_family\":\"whisper\",\"model_name\":\"large-v3-turbo-q5\",\"model_version\":\"5359861c-q5_0\",\"release_sequence\":1,\"source_uri\":\"https://huggingface.co/ggerganov/whisper.cpp\",\"license_id\":\"MIT-whisper.cpp-model-card\",\"expected_size\":574041195,\"signature_key_id\":\"wigigadict-catalog-v1\",\"minimum_manager_version\":1,\"expires_at_ms\":4102444800000,\"compatibility_abi\":\"wigigadict-model-abi-v1\",\"files\":[{\"path\":\"ggml-large-v3-turbo-q5_0.bin\",\"size\":574041195,\"sha256\":\"394221709cd5ad1f40c46e6031ca61bce88931e6e088c188294c6d5a55ffa7e2\",\"download_uri\":\"https://huggingface.co/ggerganov/whisper.cpp/resolve/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-large-v3-turbo-q5_0.bin\"}],\"runtime\":{\"profile_id\":\"whisper-large-v3-turbo-q5-vulkan-catalog\",\"profile_version\":1,\"adapter_type\":\"transcribe-rs\",\"adapter_version\":\"0.3.11\",\"device_kind\":\"vulkan\",\"device_id\":null,\"settings\":{\"model_path\":\"ggml-large-v3-turbo-q5_0.bin\",\"threads\":0,\"timeout_ms\":120000,\"worker_path\":\"wigigadict-asr-worker.exe\"},\"probe_file\":\"ggml-large-v3-turbo-q5_0.bin\"}}",
+      "manifest_signature_hex": "659aa496e187cb87c5fd087cab3eeee17c99bbcd5a89ca66a01b82f9bbc1e8d56765f043adfa4050e06b4b1f0091c8277bc26cb203dbd4ee4bae84b245c1690a"
+    },
+    {
+      "display_name": "Whisper medium Q5",
+      "summary": "Средняя модель для процессора. Пик памяти измерен — 1075 МБ. Скорость и качество не измерялись.",
+      "languages": [
+        "multi"
+      ],
+      "requirements": {
+        "device_kind": "cpu",
+        "min_ram_mb": 2048,
+        "min_vram_mb": null
+      },
+      "recommended": false,
+      "owner_measured": false,
+      "manifest_json": "{\"schema_version\":1,\"package_id\":\"whisper-medium-q5-cpu\",\"engine_family\":\"whisper\",\"model_name\":\"medium-q5\",\"model_version\":\"5359861c-q5_0\",\"release_sequence\":1,\"source_uri\":\"https://huggingface.co/ggerganov/whisper.cpp\",\"license_id\":\"MIT-whisper.cpp-model-card\",\"expected_size\":539212467,\"signature_key_id\":\"wigigadict-catalog-v1\",\"minimum_manager_version\":1,\"expires_at_ms\":4102444800000,\"compatibility_abi\":\"wigigadict-model-abi-v1\",\"files\":[{\"path\":\"ggml-medium-q5_0.bin\",\"size\":539212467,\"sha256\":\"19fea4b380c3a618ec4723c3eef2eb785ffba0d0538cf43f8f235e7b3b34220f\",\"download_uri\":\"https://huggingface.co/ggerganov/whisper.cpp/resolve/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-medium-q5_0.bin\"}],\"runtime\":{\"profile_id\":\"whisper-medium-q5-cpu\",\"profile_version\":1,\"adapter_type\":\"transcribe-rs\",\"adapter_version\":\"0.3.11\",\"device_kind\":\"cpu\",\"device_id\":null,\"settings\":{\"model_path\":\"ggml-medium-q5_0.bin\",\"threads\":16,\"timeout_ms\":120000,\"worker_path\":\"wigigadict-asr-worker.exe\"},\"probe_file\":\"ggml-medium-q5_0.bin\"}}",
+      "manifest_signature_hex": "3689455890e0e538150156761f5ae7598c3a6376c9a7ba2dcb7fe971aa73e71a22ff8e359b909067e1ca5e450d1d0db310943c23896f77b2ce4f1dd211775608"
+    },
+    {
+      "display_name": "Whisper small",
+      "summary": "Не установлена и не измерена. Требования — оценка по соседям каталога: веса 488 МБ, между base (141 МБ, пик 325 МБ) и medium (515 МБ, пик 1075 МБ).",
+      "languages": [
+        "multi"
+      ],
+      "requirements": {
+        "device_kind": "cpu",
+        "min_ram_mb": 2048,
+        "min_vram_mb": null
+      },
+      "recommended": false,
+      "owner_measured": false,
+      "manifest_json": "{\"schema_version\":1,\"package_id\":\"whisper-small-cpu\",\"engine_family\":\"whisper\",\"model_name\":\"small\",\"model_version\":\"5359861c-f16\",\"release_sequence\":1,\"source_uri\":\"https://huggingface.co/ggerganov/whisper.cpp\",\"license_id\":\"MIT-whisper.cpp-model-card\",\"expected_size\":487601967,\"signature_key_id\":\"wigigadict-catalog-v1\",\"minimum_manager_version\":1,\"expires_at_ms\":4102444800000,\"compatibility_abi\":\"wigigadict-model-abi-v1\",\"files\":[{\"path\":\"ggml-small.bin\",\"size\":487601967,\"sha256\":\"1be3a9b2063867b937e64e2ec7483364a79917e157fa98c5d94b5c1fffea987b\",\"download_uri\":\"https://huggingface.co/ggerganov/whisper.cpp/resolve/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-small.bin\"}],\"runtime\":{\"profile_id\":\"whisper-small-cpu\",\"profile_version\":1,\"adapter_type\":\"transcribe-rs\",\"adapter_version\":\"0.3.11\",\"device_kind\":\"cpu\",\"device_id\":null,\"settings\":{\"model_path\":\"ggml-small.bin\",\"threads\":16,\"timeout_ms\":120000,\"worker_path\":\"wigigadict-asr-worker.exe\"},\"probe_file\":\"ggml-small.bin\"}}",
+      "manifest_signature_hex": "5240c9734006c03d4be5498fe67970ef64bab05cd01936f36c2b360613efd77117e084f320d4bd0c4a90e714d8b7edac3c6f8178d63e40eeb102417e4ae6c60b"
+    },
+    {
+      "display_name": "Whisper base",
+      "summary": "Самая лёгкая модель каталога: 141 МБ. Пик памяти измерен — 325 МБ. Скорость и качество на русском не измерялись.",
+      "languages": [
+        "multi"
+      ],
+      "requirements": {
+        "device_kind": "cpu",
+        "min_ram_mb": 1024,
+        "min_vram_mb": null
+      },
+      "recommended": false,
+      "owner_measured": false,
+      "manifest_json": "{\"schema_version\":1,\"package_id\":\"whisper-base-cpu\",\"engine_family\":\"whisper\",\"model_name\":\"base\",\"model_version\":\"5359861c-f16\",\"release_sequence\":1,\"source_uri\":\"https://huggingface.co/ggerganov/whisper.cpp\",\"license_id\":\"MIT-whisper.cpp-model-card\",\"expected_size\":147951465,\"signature_key_id\":\"wigigadict-catalog-v1\",\"minimum_manager_version\":1,\"expires_at_ms\":4102444800000,\"compatibility_abi\":\"wigigadict-model-abi-v1\",\"files\":[{\"path\":\"ggml-base.bin\",\"size\":147951465,\"sha256\":\"60ed5bc3dd14eea856493d334349b405782ddcaf0028d4b5df4088345fba2efe\",\"download_uri\":\"https://huggingface.co/ggerganov/whisper.cpp/resolve/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-base.bin\"}],\"runtime\":{\"profile_id\":\"whisper-base-cpu\",\"profile_version\":1,\"adapter_type\":\"transcribe-rs\",\"adapter_version\":\"0.3.11\",\"device_kind\":\"cpu\",\"device_id\":null,\"settings\":{\"model_path\":\"ggml-base.bin\",\"threads\":16,\"timeout_ms\":120000,\"worker_path\":\"wigigadict-asr-worker.exe\"},\"probe_file\":\"ggml-base.bin\"}}",
+      "manifest_signature_hex": "cfd24f350b178194d07d3df46c51e6734d43c203df5cc4f3012a6abdbaa7f1a60268efa2cc4a798e5d9fb02cd1714f561e4b59faa9f75fe8276def91fcdfea0a"
+    }
+  ]
+}

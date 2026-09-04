@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-21",
+  "harness_version": "0.0.1",
+  "environment": {
+    "os_family": "Windows 10",
+    "display_version": "22H2",
+    "build": "19045.6456",
+    "architecture": "x86_64",
+    "integrity": "medium"
+  },
+  "fixture": {
+    "process_name": "wigigadict-win32-spike.exe",
+    "window_class": "WiGigaDictM0Win32SpikeFixture",
+    "control_class": "EDIT"
+  },
+  "checks": {
+    "hotkey_down_repeat_up": "pass",
+    "overlay_noactivate_100_cycles": "pass",
+    "unicode_packet_target_ack": "pass",
+    "virtual_key_transport_only_uncertain": "pass",
+    "foreground_change_uncertain": "pass",
+    "missing_hwnd_uncertain": "pass",
+    "elevated_target_policy_uncertain": "pass",
+    "partial_sendinput_uncertain": "pass",
+    "clipboard_busy_uncertain": "pass",
+    "clipboard_restore_failure_uncertain": "pass"
+  },
+  "content_logged": false,
+  "result": "pass"
+}

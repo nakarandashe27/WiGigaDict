@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-21",
+  "shell_version": "0.0.1",
+  "environment": {
+    "os_family": "Windows 10",
+    "display_version": "22H2",
+    "build": "19045.6456",
+    "architecture": "x86_64"
+  },
+  "window_kind": "tauri_webview2",
+  "cycles": 100,
+  "target_mismatches": 0,
+  "focus_steals": 0,
+  "required_styles_present": true,
+  "content_logged": false,
+  "result": "pass"
+}

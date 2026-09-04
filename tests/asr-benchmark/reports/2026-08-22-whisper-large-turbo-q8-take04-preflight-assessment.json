@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-22",
+  "scope": "benchmark-only quantization quality spike; no production approval",
+  "source": {
+    "repository": "ggerganov/whisper.cpp",
+    "revision": "5359861c739e955e79d9a303bcbc70fb988958b1",
+    "artifact": "ggml-large-v3-turbo-q8_0.bin",
+    "bytes": 874188075,
+    "sha256": "317eb69c11673c9de1e1f0d459b253999804ec71ac4c23c17ecf5fbe24e259a1"
+  },
+  "worker": {
+    "path": ".t/release/wigigadict-asr-benchmark.exe",
+    "sha256": "cb05d28cf8baa67b3a593747dc5efad6bb03fcafe33da3810249b3cb6bb84177",
+    "profile": "gpu",
+    "backend_observed": "NVIDIA GeForce RTX 5070 Laptop GPU via Vulkan1"
+  },
+  "corpus": {
+    "private_id": "speaker-a/take-04",
+    "provenance_sha256": "4ca9f280a0b26c9f3a652d7e4b6825ca094cc12506a276ac5ff2cae16325fed8",
+    "boundary_safe": true,
+    "tail_padding_ms": 3000,
+    "sample_ids": [
+      "ru-005",
+      "ru-030",
+      "ru-060",
+      "en-005",
+      "en-030",
+      "en-060"
+    ],
+    "modes": [
+      "cold",
+      "warm"
+    ]
+  },
+  "evidence": {
+    "private_ndjson": "tests/asr-benchmark/evidence/whisper-large-turbo-q8-vulkan-human-speaker-a-take04-preflight.ndjson",
+    "private_ndjson_sha256": "c5cb0911193aa069492508943277e71a746ce930b897d611d4f061d04bc9e007",
+    "report": "tests/asr-benchmark/reports/2026-08-22-whisper-large-turbo-q8-vulkan-human-speaker-a-take04-preflight.json",
+    "report_sha256": "90187c5aa366545a249ac3b25433a750597a850657b402ec1c2d6028a7a17037",
+    "record_count": 12
+  },
+  "matched_results": {
+    "q5": {
+      "model_sha256": "394221709cd5ad1f40c46e6031ca61bce88931e6e088c188294c6d5a55ffa7e2",
+      "markers_present": 2,
+      "markers_total": 12,
+      "mean_wer": 0.608568956,
+      "mean_cer": 0.321658389
+    },
+    "q8": {
+      "markers_present": 1,
+      "markers_total": 12,
+      "mean_wer": 0.655207657,
+      "mean_cer": 0.327304998,
+      "non_monotonic_count": 0
+    }
+  },
+  "gate": {
+    "marker_recovery_improved": false,
+    "mean_wer_improved": false,
+    "mean_cer_improved": false,
+    "monotonic_segments_passed": true,
+    "full_matrix_authorized": false
+  },
+  "decision": "reject Q8_0 candidate after preflight; retain artifact only for reproducible benchmark evidence",
+  "step4_complete": false
+}

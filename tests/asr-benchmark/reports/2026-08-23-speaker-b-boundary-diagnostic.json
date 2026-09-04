@@ -1,0 +1,438 @@
+{
+  "schema_version": 1,
+  "validator": "wigigadict-asr-boundary-validator/0.0.1",
+  "fixture_manifest_sha256": "e0224ee36cc638cc71e5a2c0fd3d678bdbc6a39b0f3e20152395d18032a80bbf",
+  "fixture_schema_version": 1,
+  "purpose": "diagnostic",
+  "contract": {
+    "tail_ms": 1000,
+    "frame_ms": 20,
+    "legacy_peak_dbfs_strictly_above": -45.0,
+    "energy_rms_dbfs_strictly_above": -50.0,
+    "vad": "webrtc-vad 0.4.0; 16 kHz; Aggressive",
+    "min_total_ms": 100,
+    "min_consecutive_ms": 60
+  },
+  "acceptance_pass": null,
+  "summaries": {
+    "diagnostic": {
+      "samples": 20,
+      "speech": 0,
+      "non_speech": 0,
+      "legacy_peak": {
+        "true_positive": 0,
+        "true_negative": 0,
+        "false_positive": 0,
+        "false_negative": 0
+      },
+      "primary": {
+        "true_positive": 0,
+        "true_negative": 0,
+        "false_positive": 0,
+        "false_negative": 0
+      }
+    }
+  },
+  "samples": [
+    {
+      "id": "take-02/en-005",
+      "split": "diagnostic",
+      "label": "unknown",
+      "subtype": "existing-human-take",
+      "relative_path": "take-02/en-005.wav",
+      "sha256": "b9e8be5f3d41f32a9f3ddb165d61e7c24d73b618b0fb4a3e300e4441003ee8c7",
+      "duration_ms": 7986,
+      "metrics": {
+        "peak_dbfs": -48.371,
+        "energy_active_ms": 0,
+        "energy_max_consecutive_ms": 0,
+        "vad_active_ms": 0,
+        "vad_max_consecutive_ms": 0,
+        "legacy_peak_pass": false,
+        "primary_pass": false
+      },
+      "legacy_correct": null,
+      "primary_correct": null
+    },
+    {
+      "id": "take-02/en-015",
+      "split": "diagnostic",
+      "label": "unknown",
+      "subtype": "existing-human-take",
+      "relative_path": "take-02/en-015.wav",
+      "sha256": "a5ac5dc544bb39c80575968c11306b167db6a5b48ee206487061ab71e9e72814",
+      "duration_ms": 17985,
+      "metrics": {
+        "peak_dbfs": -42.01,
+        "energy_active_ms": 0,
+        "energy_max_consecutive_ms": 0,
+        "vad_active_ms": 0,
+        "vad_max_consecutive_ms": 0,
+        "legacy_peak_pass": true,
+        "primary_pass": false
+      },
+      "legacy_correct": null,
+      "primary_correct": null
+    },
+    {
+      "id": "take-02/en-025",
+      "split": "diagnostic",
+      "label": "unknown",
+      "subtype": "existing-human-take",
+      "relative_path": "take-02/en-025.wav",
+      "sha256": "263edd86479813edce084cc873166d92770f146481ecb3ee30a914dbcc627465",
+      "duration_ms": 27985,
+      "metrics": {
+        "peak_dbfs": -49.403,
+        "energy_active_ms": 0,
+        "energy_max_consecutive_ms": 0,
+        "vad_active_ms": 0,
+        "vad_max_consecutive_ms": 0,
+        "legacy_peak_pass": false,
+        "primary_pass": false
+      },
+      "legacy_correct": null,
+      "primary_correct": null
+    },
+    {
+      "id": "take-02/en-030",
+      "split": "diagnostic",
+      "label": "unknown",
+      "subtype": "existing-human-take",
+      "relative_path": "take-02/en-030.wav",
+      "sha256": "de8ab7cf611e7feb4362fb164c8d86b063cec015f9ff7822b0cb04d40d8a50f2",
+      "duration_ms": 32984,
+      "metrics": {
+        "peak_dbfs": -49.095,
+        "energy_active_ms": 0,
+        "energy_max_consecutive_ms": 0,
+        "vad_active_ms": 0,
+        "vad_max_consecutive_ms": 0,
+        "legacy_peak_pass": false,
+        "primary_pass": false
+      },
+      "legacy_correct": null,
+      "primary_correct": null
+    },
+    {
+      "id": "take-02/en-060",
+      "split": "diagnostic",
+      "label": "unknown",
+      "subtype": "existing-human-take",
+      "relative_path": "take-02/en-060.wav",
+      "sha256": "e9d279ede872efb7228be707d58682215ee4437bae8f9a9f8ec378ee58fcd837",
+      "duration_ms": 62983,
+      "metrics": {
+        "peak_dbfs": -49.171,
+        "energy_active_ms": 0,
+        "energy_max_consecutive_ms": 0,
+        "vad_active_ms": 0,
+        "vad_max_consecutive_ms": 0,
+        "legacy_peak_pass": false,
+        "primary_pass": false
+      },
+      "legacy_correct": null,
+      "primary_correct": null
+    },
+    {
+      "id": "take-02/ru-005",
+      "split": "diagnostic",
+      "label": "unknown",
+      "subtype": "existing-human-take",
+      "relative_path": "take-02/ru-005.wav",
+      "sha256": "3b0001d3ec404de1785f7d85927428ea823b0403957df0db7edf4001fb62b1ec",
+      "duration_ms": 7985,
+      "metrics": {
+        "peak_dbfs": -42.42,
+        "energy_active_ms": 20,
+        "energy_max_consecutive_ms": 20,
+        "vad_active_ms": 80,
+        "vad_max_consecutive_ms": 80,
+        "legacy_peak_pass": true,
+        "primary_pass": false
+      },
+      "legacy_correct": null,
+      "primary_correct": null
+    },
+    {
+      "id": "take-02/ru-015",
+      "split": "diagnostic",
+      "label": "unknown",
+      "subtype": "existing-human-take",
+      "relative_path": "take-02/ru-015.wav",
+      "sha256": "360770e91a4aef8750bcb576cf70c180622c263655a14675227671f3fec29cc8",
+      "duration_ms": 17985,
+      "metrics": {
+        "peak_dbfs": -48.371,
+        "energy_active_ms": 0,
+        "energy_max_consecutive_ms": 0,
+        "vad_active_ms": 80,
+        "vad_max_consecutive_ms": 80,
+        "legacy_peak_pass": false,
+        "primary_pass": false
+      },
+      "legacy_correct": null,
+      "primary_correct": null
+    },
+    {
+      "id": "take-02/ru-025",
+      "split": "diagnostic",
+      "label": "unknown",
+      "subtype": "existing-human-take",
+      "relative_path": "take-02/ru-025.wav",
+      "sha256": "30018fae5d69995ced3461e8b3e8e258e4cccf8749ba97086970ee2f5228e111",
+      "duration_ms": 27985,
+      "metrics": {
+        "peak_dbfs": -49.02,
+        "energy_active_ms": 0,
+        "energy_max_consecutive_ms": 0,
+        "vad_active_ms": 0,
+        "vad_max_consecutive_ms": 0,
+        "legacy_peak_pass": false,
+        "primary_pass": false
+      },
+      "legacy_correct": null,
+      "primary_correct": null
+    },
+    {
+      "id": "take-02/ru-030",
+      "split": "diagnostic",
+      "label": "unknown",
+      "subtype": "existing-human-take",
+      "relative_path": "take-02/ru-030.wav",
+      "sha256": "64f80aea79226458d738e84616d63dcb1bbf16deef1ccf8ef6dcfe673a646ad8",
+      "duration_ms": 32983,
+      "metrics": {
+        "peak_dbfs": -48.371,
+        "energy_active_ms": 0,
+        "energy_max_consecutive_ms": 0,
+        "vad_active_ms": 0,
+        "vad_max_consecutive_ms": 0,
+        "legacy_peak_pass": false,
+        "primary_pass": false
+      },
+      "legacy_correct": null,
+      "primary_correct": null
+    },
+    {
+      "id": "take-02/ru-060",
+      "split": "diagnostic",
+      "label": "unknown",
+      "subtype": "existing-human-take",
+      "relative_path": "take-02/ru-060.wav",
+      "sha256": "093e6b2fb79179ca978a226930bca1bf6546a7effb866065f515883cf5640cc6",
+      "duration_ms": 62982,
+      "metrics": {
+        "peak_dbfs": -49.095,
+        "energy_active_ms": 0,
+        "energy_max_consecutive_ms": 0,
+        "vad_active_ms": 0,
+        "vad_max_consecutive_ms": 0,
+        "legacy_peak_pass": false,
+        "primary_pass": false
+      },
+      "legacy_correct": null,
+      "primary_correct": null
+    },
+    {
+      "id": "take-03/en-005",
+      "split": "diagnostic",
+      "label": "unknown",
+      "subtype": "existing-human-take",
+      "relative_path": "take-03/en-005.wav",
+      "sha256": "b09db6a18184c3514fb3e1e5f577b498e9cdec0842d586231b013e81866eb58a",
+      "duration_ms": 7985,
+      "metrics": {
+        "peak_dbfs": -47.263,
+        "energy_active_ms": 0,
+        "energy_max_consecutive_ms": 0,
+        "vad_active_ms": 80,
+        "vad_max_consecutive_ms": 80,
+        "legacy_peak_pass": false,
+        "primary_pass": false
+      },
+      "legacy_correct": null,
+      "primary_correct": null
+    },
+    {
+      "id": "take-03/en-015",
+      "split": "diagnostic",
+      "label": "unknown",
+      "subtype": "existing-human-take",
+      "relative_path": "take-03/en-015.wav",
+      "sha256": "4bd420736034f8b92de55ff4de10706a1412cd27311e199a847bc69742b3be94",
+      "duration_ms": 17985,
+      "metrics": {
+        "peak_dbfs": -46.391,
+        "energy_active_ms": 0,
+        "energy_max_consecutive_ms": 0,
+        "vad_active_ms": 80,
+        "vad_max_consecutive_ms": 80,
+        "legacy_peak_pass": false,
+        "primary_pass": false
+      },
+      "legacy_correct": null,
+      "primary_correct": null
+    },
+    {
+      "id": "take-03/en-025",
+      "split": "diagnostic",
+      "label": "unknown",
+      "subtype": "existing-human-take",
+      "relative_path": "take-03/en-025.wav",
+      "sha256": "4403db32dce51c9735ccc8d31e60461c225e1497eeeb5bb579e76b722f36c3c8",
+      "duration_ms": 27984,
+      "metrics": {
+        "peak_dbfs": -49.641,
+        "energy_active_ms": 0,
+        "energy_max_consecutive_ms": 0,
+        "vad_active_ms": 0,
+        "vad_max_consecutive_ms": 0,
+        "legacy_peak_pass": false,
+        "primary_pass": false
+      },
+      "legacy_correct": null,
+      "primary_correct": null
+    },
+    {
+      "id": "take-03/en-030",
+      "split": "diagnostic",
+      "label": "unknown",
+      "subtype": "existing-human-take",
+      "relative_path": "take-03/en-030.wav",
+      "sha256": "02c441287e46326fbf26b74ac6a9bacba872fb94e9c8a364fc0d89cbcc2d752c",
+      "duration_ms": 32984,
+      "metrics": {
+        "peak_dbfs": -47.638,
+        "energy_active_ms": 0,
+        "energy_max_consecutive_ms": 0,
+        "vad_active_ms": 80,
+        "vad_max_consecutive_ms": 80,
+        "legacy_peak_pass": false,
+        "primary_pass": false
+      },
+      "legacy_correct": null,
+      "primary_correct": null
+    },
+    {
+      "id": "take-03/en-060",
+      "split": "diagnostic",
+      "label": "unknown",
+      "subtype": "existing-human-take",
+      "relative_path": "take-03/en-060.wav",
+      "sha256": "9fccc159d04ff9aea92811db6ab53e8c007a6fadf231db35f6bdab42b8892559",
+      "duration_ms": 62983,
+      "metrics": {
+        "peak_dbfs": -49.095,
+        "energy_active_ms": 0,
+        "energy_max_consecutive_ms": 0,
+        "vad_active_ms": 0,
+        "vad_max_consecutive_ms": 0,
+        "legacy_peak_pass": false,
+        "primary_pass": false
+      },
+      "legacy_correct": null,
+      "primary_correct": null
+    },
+    {
+      "id": "take-03/ru-005",
+      "split": "diagnostic",
+      "label": "unknown",
+      "subtype": "existing-human-take",
+      "relative_path": "take-03/ru-005.wav",
+      "sha256": "f37789b355606172c14aa328b43e9c1cec4566b264cc760b9092986591db481b",
+      "duration_ms": 7985,
+      "metrics": {
+        "peak_dbfs": -49.481,
+        "energy_active_ms": 0,
+        "energy_max_consecutive_ms": 0,
+        "vad_active_ms": 0,
+        "vad_max_consecutive_ms": 0,
+        "legacy_peak_pass": false,
+        "primary_pass": false
+      },
+      "legacy_correct": null,
+      "primary_correct": null
+    },
+    {
+      "id": "take-03/ru-015",
+      "split": "diagnostic",
+      "label": "unknown",
+      "subtype": "existing-human-take",
+      "relative_path": "take-03/ru-015.wav",
+      "sha256": "b3ea4e7a2ce9e34b1d45a901217a392e438a79ad2642efe2c97c1d7b4bdb76b2",
+      "duration_ms": 17984,
+      "metrics": {
+        "peak_dbfs": -47.325,
+        "energy_active_ms": 0,
+        "energy_max_consecutive_ms": 0,
+        "vad_active_ms": 80,
+        "vad_max_consecutive_ms": 80,
+        "legacy_peak_pass": false,
+        "primary_pass": false
+      },
+      "legacy_correct": null,
+      "primary_correct": null
+    },
+    {
+      "id": "take-03/ru-025",
+      "split": "diagnostic",
+      "label": "unknown",
+      "subtype": "existing-human-take",
+      "relative_path": "take-03/ru-025.wav",
+      "sha256": "9357dd240fe4dcb6f653ca90d248b642817b75029613501f0bc045fa52466486",
+      "duration_ms": 27984,
+      "metrics": {
+        "peak_dbfs": -43.265,
+        "energy_active_ms": 0,
+        "energy_max_consecutive_ms": 0,
+        "vad_active_ms": 0,
+        "vad_max_consecutive_ms": 0,
+        "legacy_peak_pass": true,
+        "primary_pass": false
+      },
+      "legacy_correct": null,
+      "primary_correct": null
+    },
+    {
+      "id": "take-03/ru-030",
+      "split": "diagnostic",
+      "label": "unknown",
+      "subtype": "existing-human-take",
+      "relative_path": "take-03/ru-030.wav",
+      "sha256": "739336f607ee61a661e06324c1e52d71e0a3784459751670b438f9b22ca89590",
+      "duration_ms": 32984,
+      "metrics": {
+        "peak_dbfs": -50.223,
+        "energy_active_ms": 0,
+        "energy_max_consecutive_ms": 0,
+        "vad_active_ms": 80,
+        "vad_max_consecutive_ms": 80,
+        "legacy_peak_pass": false,
+        "primary_pass": false
+      },
+      "legacy_correct": null,
+      "primary_correct": null
+    },
+    {
+      "id": "take-03/ru-060",
+      "split": "diagnostic",
+      "label": "unknown",
+      "subtype": "existing-human-take",
+      "relative_path": "take-03/ru-060.wav",
+      "sha256": "a09cc9f1922fd24e7a8c14cb96e77d15a9cfd7a6d47be552d744c86d1be4706e",
+      "duration_ms": 62983,
+      "metrics": {
+        "peak_dbfs": -45.7,
+        "energy_active_ms": 0,
+        "energy_max_consecutive_ms": 0,
+        "vad_active_ms": 80,
+        "vad_max_consecutive_ms": 80,
+        "legacy_peak_pass": false,
+        "primary_pass": false
+      },
+      "legacy_correct": null,
+      "primary_correct": null
+    }
+  ]
+}

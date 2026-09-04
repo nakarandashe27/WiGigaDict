@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "gate_id": "m1-golden-flow-v1",
+  "os_build": 19045,
+  "runtime_profile": "whisper-large-v3-turbo-q5-vulkan",
+  "gates": {
+    "offline_deny_all": false,
+    "crash_restart": false,
+    "load_admission": false,
+    "cleanup_corpus": false,
+    "marker_redaction": false
+  },
+  "sessions": []
+}

@@ -1,0 +1,62 @@
+# JavaScript / Vite
+node_modules/
+dist/
+*.tsbuildinfo
+.vite/
+.npm-cache/
+
+# Rust / Cargo
+target/
+.t/
+Cargo.lock.tmp
+*.cdx.json
+
+# Tauri build output
+apps/desktop/src-tauri/target/
+apps/desktop/src-tauri/binaries/*.exe
+apps/desktop/src-tauri/gen/
+apps/desktop/src-tauri/.tauri/
+apps/desktop/src-tauri/icons/icon.generated.png
+
+# Local tooling and secrets
+.env
+.env.*
+!.env.example
+.idea/
+.vscode/
+.playwright-cli/
+*.user
+*.suo
+
+# Рабочие журналы агента и прогонов: содержат имя пользователя, пути машины и внутренние заметки.
+# В публичном репозитории им не место, а история решений живёт в context/architecture.
+logs/
+
+# Внутренний бизнес-контекст: выручка, прайс, юнит-экономика, прогноз, конкуренты.
+# Внимание: файлы уже в индексе git, одного .gitignore мало — сначала `git rm -r --cached context/business`.
+context/business/
+
+# Generated CI and supply-chain artifacts
+artifacts/
+
+# ASR benchmark local/private inputs and generated evidence
+tests/asr-benchmark/generated/
+tests/asr-benchmark/private/
+# Keep sanitized JSON manifests versioned, never benchmark weight/download artifacts.
+tests/asr-benchmark/models/**/*.bin
+tests/asr-benchmark/models/**/*.onnx
+tests/asr-benchmark/models/**/*.gguf
+tests/asr-benchmark/models/**/*.pt
+tests/asr-benchmark/models/**/*.pth
+tests/asr-benchmark/models/**/*.safetensors
+tests/asr-benchmark/models/**/*.part
+tests/asr-benchmark/evidence/*.ndjson
+tests/asr-benchmark/evidence/*.json
+tests/asr-benchmark/.work/
+tools/asr-benchmark/target/
+
+# Signing keys never belong in a repository that gets published.
+*.key
+
+# The signed catalog and signature are public release inputs and stay versioned.
+# Its private signing key remains outside the working tree and is covered by *.key.

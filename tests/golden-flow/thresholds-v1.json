@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "gate_id": "m1-golden-flow-v1",
+  "required_os_build": 19045,
+  "required_runtime_profile": "whisper-large-v3-turbo-q5-vulkan",
+  "required_sessions": 100,
+  "required_codex_sessions": 50,
+  "required_vscode_sessions": 50,
+  "minimum_short_sessions": 10,
+  "minimum_medium_sessions": 30,
+  "minimum_long_sessions": 50,
+  "maximum_irrecoverable_results": 0,
+  "maximum_intent_changed_sessions": 0,
+  "maximum_corrupt_audio_sessions": 0,
+  "minimum_quick_review_sessions": 51,
+  "maximum_release_to_terminal_p50_ms": 1500,
+  "maximum_release_to_terminal_p95_ms": 2500,
+  "maximum_inference_p95_ms": 1163,
+  "maximum_rtf_p95": 0.0341,
+  "maximum_peak_ram_bytes": 727843636,
+  "maximum_peak_vram_bytes": 1019635303,
+  "required_gates": {
+    "offline_deny_all": true,
+    "crash_restart": true,
+    "load_admission": true,
+    "cleanup_corpus": true,
+    "marker_redaction": true
+  }
+}

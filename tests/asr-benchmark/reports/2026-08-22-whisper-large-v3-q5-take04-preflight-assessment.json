@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-22",
+  "scope": "benchmark-only model-architecture quality spike; no production approval",
+  "source": {
+    "repository": "ggerganov/whisper.cpp",
+    "revision": "5359861c739e955e79d9a303bcbc70fb988958b1",
+    "artifact": "ggml-large-v3-q5_0.bin",
+    "bytes": 1081140203,
+    "sha256": "d75795ecff3f83b5faa89d1900604ad8c780abd5739fae406de19f23ecd98ad1"
+  },
+  "worker": {
+    "path": ".t/release/wigigadict-asr-benchmark.exe",
+    "sha256": "cb05d28cf8baa67b3a593747dc5efad6bb03fcafe33da3810249b3cb6bb84177",
+    "profile": "gpu",
+    "backend_observed": "NVIDIA GeForce RTX 5070 Laptop GPU via Vulkan1"
+  },
+  "corpus": {
+    "private_id": "speaker-a/take-04",
+    "provenance_sha256": "4ca9f280a0b26c9f3a652d7e4b6825ca094cc12506a276ac5ff2cae16325fed8",
+    "boundary_safe": true,
+    "tail_padding_ms": 3000,
+    "sample_ids": [
+      "ru-005",
+      "ru-030",
+      "ru-060",
+      "en-005",
+      "en-030",
+      "en-060"
+    ],
+    "modes": [
+      "cold",
+      "warm"
+    ]
+  },
+  "evidence": {
+    "private_ndjson": "tests/asr-benchmark/evidence/whisper-large-v3-q5-vulkan-human-speaker-a-take04-preflight.ndjson",
+    "private_ndjson_sha256": "04dbaa77f2f7fd0450dbcbf7dee506a25255dc85ba2e74065e4f6dbf29115f9a",
+    "report": "tests/asr-benchmark/reports/2026-08-22-whisper-large-v3-q5-vulkan-human-speaker-a-take04-preflight.json",
+    "report_sha256": "45e13f7c64dbb24a2053e35ffe27e6993c7130459a87ba2b59504ec6afcd22b8",
+    "record_count": 12
+  },
+  "matched_results": {
+    "turbo_q5": {
+      "model_sha256": "394221709cd5ad1f40c46e6031ca61bce88931e6e088c188294c6d5a55ffa7e2",
+      "markers_present": 2,
+      "markers_total": 12,
+      "mean_wer": 0.608568956,
+      "mean_cer": 0.321658389,
+      "technical_token_errors": 46,
+      "technical_token_total": 108,
+      "peak_ram_max_bytes": 661676032
+    },
+    "large_v3_q5": {
+      "markers_present": 2,
+      "markers_total": 12,
+      "mean_wer": 0.576795886,
+      "mean_cer": 0.321768748,
+      "technical_token_errors": 47,
+      "technical_token_total": 108,
+      "non_monotonic_count": 0,
+      "peak_ram_max_bytes": 1162854400
+    }
+  },
+  "gate": {
+    "marker_recovery_improved": false,
+    "mean_wer_improved": true,
+    "mean_cer_improved": false,
+    "monotonic_segments_passed": true,
+    "realtime_rtf_passed": true,
+    "full_matrix_authorized": false
+  },
+  "decision": "reject non-turbo large-v3 Q5 candidate after preflight; retain artifact only for reproducible benchmark evidence",
+  "step4_complete": false
+}

@@ -1,0 +1,295 @@
+{
+  "schema_version": 1,
+  "validator": "wigigadict-asr-boundary-validator/0.0.1",
+  "fixture_manifest_sha256": "f4f91d2b47aee98d506a246428ef4a31e0bd974c2a7caff6c6de7ab9b40a294f",
+  "fixture_schema_version": 1,
+  "purpose": "fixture",
+  "contract": {
+    "tail_ms": 1000,
+    "frame_ms": 20,
+    "legacy_peak_dbfs_strictly_above": -45.0,
+    "energy_rms_dbfs_strictly_above": -50.0,
+    "vad": "webrtc-vad 0.4.0; 16 kHz; Aggressive",
+    "min_total_ms": 100,
+    "min_consecutive_ms": 60
+  },
+  "acceptance_pass": true,
+  "summaries": {
+    "calibration": {
+      "samples": 6,
+      "speech": 2,
+      "non_speech": 4,
+      "legacy_peak": {
+        "true_positive": 2,
+        "true_negative": 1,
+        "false_positive": 3,
+        "false_negative": 0
+      },
+      "primary": {
+        "true_positive": 2,
+        "true_negative": 4,
+        "false_positive": 0,
+        "false_negative": 0
+      }
+    },
+    "heldout": {
+      "samples": 6,
+      "speech": 2,
+      "non_speech": 4,
+      "legacy_peak": {
+        "true_positive": 2,
+        "true_negative": 2,
+        "false_positive": 2,
+        "false_negative": 0
+      },
+      "primary": {
+        "true_positive": 2,
+        "true_negative": 4,
+        "false_positive": 0,
+        "false_negative": 0
+      }
+    }
+  },
+  "samples": [
+    {
+      "id": "cal-speech-ru-normal",
+      "split": "calibration",
+      "label": "speech",
+      "subtype": "tts-speech-normal",
+      "relative_path": "cal-speech-ru-normal.wav",
+      "sha256": "23ea8edc6f8be7bb56c22588ba8e3bdfd456c7effdc591fbe6cc175812859bdf",
+      "duration_ms": 3000,
+      "metrics": {
+        "peak_dbfs": -10.549,
+        "energy_active_ms": 700,
+        "energy_max_consecutive_ms": 700,
+        "vad_active_ms": 700,
+        "vad_max_consecutive_ms": 700,
+        "legacy_peak_pass": true,
+        "primary_pass": true
+      },
+      "legacy_correct": true,
+      "primary_correct": true
+    },
+    {
+      "id": "cal-speech-ru-low",
+      "split": "calibration",
+      "label": "speech",
+      "subtype": "tts-speech-low",
+      "relative_path": "cal-speech-ru-low.wav",
+      "sha256": "8598451747258ffed5a1fd989621190230500eb3055a7a49472f88f6ae395b66",
+      "duration_ms": 3000,
+      "metrics": {
+        "peak_dbfs": -19.865,
+        "energy_active_ms": 660,
+        "energy_max_consecutive_ms": 660,
+        "vad_active_ms": 660,
+        "vad_max_consecutive_ms": 660,
+        "legacy_peak_pass": true,
+        "primary_pass": true
+      },
+      "legacy_correct": true,
+      "primary_correct": true
+    },
+    {
+      "id": "cal-silence",
+      "split": "calibration",
+      "label": "non_speech",
+      "subtype": "silence",
+      "relative_path": "cal-silence.wav",
+      "sha256": "c5af6d84bf40d0c9454165e1e003af62ad677b2389badf04ae39f740c5c54f4a",
+      "duration_ms": 3000,
+      "metrics": {
+        "peak_dbfs": -120.0,
+        "energy_active_ms": 0,
+        "energy_max_consecutive_ms": 0,
+        "vad_active_ms": 0,
+        "vad_max_consecutive_ms": 0,
+        "legacy_peak_pass": false,
+        "primary_pass": false
+      },
+      "legacy_correct": true,
+      "primary_correct": true
+    },
+    {
+      "id": "cal-impulse-borderline",
+      "split": "calibration",
+      "label": "non_speech",
+      "subtype": "isolated-impulse",
+      "relative_path": "cal-impulse-borderline.wav",
+      "sha256": "03d278b3d2357e024495043e135ec82ddb4b4e71e69c6c1e89ec2fad720acae8",
+      "duration_ms": 3000,
+      "metrics": {
+        "peak_dbfs": -41.943,
+        "energy_active_ms": 0,
+        "energy_max_consecutive_ms": 0,
+        "vad_active_ms": 0,
+        "vad_max_consecutive_ms": 0,
+        "legacy_peak_pass": true,
+        "primary_pass": false
+      },
+      "legacy_correct": false,
+      "primary_correct": true
+    },
+    {
+      "id": "cal-white-noise",
+      "split": "calibration",
+      "label": "non_speech",
+      "subtype": "stationary-white-noise",
+      "relative_path": "cal-white-noise.wav",
+      "sha256": "34d65fddf11c9ddbb6122d926a21c22cc265dd74fa251671fe07abbbf1cb4116",
+      "duration_ms": 3000,
+      "metrics": {
+        "peak_dbfs": -44.42,
+        "energy_active_ms": 1000,
+        "energy_max_consecutive_ms": 1000,
+        "vad_active_ms": 80,
+        "vad_max_consecutive_ms": 80,
+        "legacy_peak_pass": true,
+        "primary_pass": false
+      },
+      "legacy_correct": false,
+      "primary_correct": true
+    },
+    {
+      "id": "cal-handling",
+      "split": "calibration",
+      "label": "non_speech",
+      "subtype": "low-frequency-handling",
+      "relative_path": "cal-handling.wav",
+      "sha256": "b511e9a66ed38a0509eb146a68940718f18a9a17da068df87690e36328087218",
+      "duration_ms": 3000,
+      "metrics": {
+        "peak_dbfs": -41.943,
+        "energy_active_ms": 100,
+        "energy_max_consecutive_ms": 100,
+        "vad_active_ms": 0,
+        "vad_max_consecutive_ms": 0,
+        "legacy_peak_pass": true,
+        "primary_pass": false
+      },
+      "legacy_correct": false,
+      "primary_correct": true
+    },
+    {
+      "id": "held-speech-en-normal",
+      "split": "heldout",
+      "label": "speech",
+      "subtype": "tts-speech-normal",
+      "relative_path": "held-speech-en-normal.wav",
+      "sha256": "057045dd3eb52d0c26dc445d7026db733396c274c3169ca79db8934fe30b8854",
+      "duration_ms": 3000,
+      "metrics": {
+        "peak_dbfs": -4.998,
+        "energy_active_ms": 700,
+        "energy_max_consecutive_ms": 700,
+        "vad_active_ms": 700,
+        "vad_max_consecutive_ms": 700,
+        "legacy_peak_pass": true,
+        "primary_pass": true
+      },
+      "legacy_correct": true,
+      "primary_correct": true
+    },
+    {
+      "id": "held-speech-en-low",
+      "split": "heldout",
+      "label": "speech",
+      "subtype": "tts-speech-low",
+      "relative_path": "held-speech-en-low.wav",
+      "sha256": "e32c68d7b078d74b13777f4002ea730f54624d39e5f868d97eff86d2cbc3987b",
+      "duration_ms": 3000,
+      "metrics": {
+        "peak_dbfs": -14.185,
+        "energy_active_ms": 680,
+        "energy_max_consecutive_ms": 680,
+        "vad_active_ms": 660,
+        "vad_max_consecutive_ms": 660,
+        "legacy_peak_pass": true,
+        "primary_pass": true
+      },
+      "legacy_correct": true,
+      "primary_correct": true
+    },
+    {
+      "id": "held-silence",
+      "split": "heldout",
+      "label": "non_speech",
+      "subtype": "silence",
+      "relative_path": "held-silence.wav",
+      "sha256": "c5af6d84bf40d0c9454165e1e003af62ad677b2389badf04ae39f740c5c54f4a",
+      "duration_ms": 3000,
+      "metrics": {
+        "peak_dbfs": -120.0,
+        "energy_active_ms": 0,
+        "energy_max_consecutive_ms": 0,
+        "vad_active_ms": 0,
+        "vad_max_consecutive_ms": 0,
+        "legacy_peak_pass": false,
+        "primary_pass": false
+      },
+      "legacy_correct": true,
+      "primary_correct": true
+    },
+    {
+      "id": "held-click-train",
+      "split": "heldout",
+      "label": "non_speech",
+      "subtype": "click-train",
+      "relative_path": "held-click-train.wav",
+      "sha256": "9b6f3a95ff8d9fba984595af6dccd71ecac7e4d9ece38e84ad8f4bab1f7c1bf5",
+      "duration_ms": 3000,
+      "metrics": {
+        "peak_dbfs": -41.943,
+        "energy_active_ms": 0,
+        "energy_max_consecutive_ms": 0,
+        "vad_active_ms": 160,
+        "vad_max_consecutive_ms": 80,
+        "legacy_peak_pass": true,
+        "primary_pass": false
+      },
+      "legacy_correct": false,
+      "primary_correct": true
+    },
+    {
+      "id": "held-breath-noise",
+      "split": "heldout",
+      "label": "non_speech",
+      "subtype": "band-limited-pink-noise",
+      "relative_path": "held-breath-noise.wav",
+      "sha256": "f52258047059d67f4b4ac84c168c3f91c81b1f17920d3bb5bb388fdde6fb1ca9",
+      "duration_ms": 3000,
+      "metrics": {
+        "peak_dbfs": -49.325,
+        "energy_active_ms": 0,
+        "energy_max_consecutive_ms": 0,
+        "vad_active_ms": 80,
+        "vad_max_consecutive_ms": 80,
+        "legacy_peak_pass": false,
+        "primary_pass": false
+      },
+      "legacy_correct": true,
+      "primary_correct": true
+    },
+    {
+      "id": "held-handling",
+      "split": "heldout",
+      "label": "non_speech",
+      "subtype": "low-frequency-handling",
+      "relative_path": "held-handling.wav",
+      "sha256": "38178a6836bb504a63ad8c2f70b97a033a076c6238522c66ca262ccd23bada3d",
+      "duration_ms": 3000,
+      "metrics": {
+        "peak_dbfs": -41.943,
+        "energy_active_ms": 140,
+        "energy_max_consecutive_ms": 140,
+        "vad_active_ms": 0,
+        "vad_max_consecutive_ms": 0,
+        "legacy_peak_pass": true,
+        "primary_pass": false
+      },
+      "legacy_correct": false,
+      "primary_correct": true
+    }
+  ]
+}

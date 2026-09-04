@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "evidence": "tests\\asr-benchmark\\evidence\\whisper-official-sanity.ndjson",
+  "corpus_id": "wigigadict-sapi-smoke-v1",
+  "record_count": 4,
+  "model_hashes": [
+    "394221709cd5ad1f40c46e6031ca61bce88931e6e088c188294c6d5a55ffa7e2"
+  ],
+  "audio_hashes": [
+    "5b14526f5025023ace4a6e70cc2754c4043bd097faae4a0ce329413797ae9d5a",
+    "bdd834cf72ebb4e23486981c26cde9b49a96b536b6bef1c51fcb59b246694a51"
+  ],
+  "model_bytes": [
+    574041195
+  ],
+  "percentile_method": "nearest_rank",
+  "groups": [
+    {
+      "engine": "whisper",
+      "profile": "cpu",
+      "mode": "cold",
+      "count": 2,
+      "inference_p50_ms": 21822.0,
+      "inference_p95_ms": 23034.0,
+      "rtf_p50": 4.3644,
+      "rtf_p95": 4.6068,
+      "peak_ram_max_bytes": 878915584.0,
+      "mean_wer": 0.5476190476190476,
+      "mean_cer": 0.3176406926406926,
+      "technical_token_errors": 3.0,
+      "technical_token_total": 4.0,
+      "truncation_count": 0,
+      "non_monotonic_count": 0
+    },
+    {
+      "engine": "whisper",
+      "profile": "gpu",
+      "mode": "cold",
+      "count": 2,
+      "inference_p50_ms": 474.0,
+      "inference_p95_ms": 6169.0,
+      "rtf_p50": 0.0948,
+      "rtf_p95": 1.2338,
+      "peak_ram_max_bytes": 658087936.0,
+      "mean_wer": 0.5476190476190476,
+      "mean_cer": 0.3176406926406926,
+      "technical_token_errors": 3.0,
+      "technical_token_total": 4.0,
+      "truncation_count": 0,
+      "non_monotonic_count": 0
+    }
+  ],
+  "samples": [
+    {
+      "engine": "whisper",
+      "profile": "cpu",
+      "mode": "cold",
+      "sample_id": "ru-005",
+      "inference_ms": 21822.0,
+      "rtf": 4.3644,
+      "peak_working_set_bytes": 878915584.0,
+      "wer": 0.6666666666666666,
+      "cer": 0.47619047619047616,
+      "technical_token_errors": 2,
+      "technical_token_total": 2,
+      "marker_present": true,
+      "monotonic_segments": true
+    },
+    {
+      "engine": "whisper",
+      "profile": "cpu",
+      "mode": "cold",
+      "sample_id": "en-005",
+      "inference_ms": 23034.0,
+      "rtf": 4.6068,
+      "peak_working_set_bytes": 862351360.0,
+      "wer": 0.42857142857142855,
+      "cer": 0.1590909090909091,
+      "technical_token_errors": 1,
+      "technical_token_total": 2,
+      "marker_present": true,
+      "monotonic_segments": true
+    },
+    {
+      "engine": "whisper",
+      "profile": "gpu",
+      "mode": "cold",
+      "sample_id": "ru-005",
+      "inference_ms": 6169.0,
+      "rtf": 1.2338,
+      "peak_working_set_bytes": 658087936.0,
+      "wer": 0.6666666666666666,
+      "cer": 0.47619047619047616,
+      "technical_token_errors": 2,
+      "technical_token_total": 2,
+      "marker_present": true,
+      "monotonic_segments": true
+    },
+    {
+      "engine": "whisper",
+      "profile": "gpu",
+      "mode": "cold",
+      "sample_id": "en-005",
+      "inference_ms": 474.0,
+      "rtf": 0.0948,
+      "peak_working_set_bytes": 657649664.0,
+      "wer": 0.42857142857142855,
+      "cer": 0.1590909090909091,
+      "technical_token_errors": 1,
+      "technical_token_total": 2,
+      "marker_present": true,
+      "monotonic_segments": true
+    }
+  ]
+}

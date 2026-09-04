@@ -1,0 +1,10 @@
+[workspace]
+resolver = "3"
+members = [
+    "apps/desktop/src-tauri",
+    "crates/protocol",
+    "crates/asr-sidecar",
+    "crates/test-support",
+    "crates/storage",
+    "crates/win32-spike",
+]

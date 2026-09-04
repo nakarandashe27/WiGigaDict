@@ -1,0 +1,48 @@
+{
+  "name": "wigigadict-desktop",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc --noEmit && vite build",
+    "format:check": "prettier --check src tests vite.config.ts vitest.config.ts eslint.config.js package.json tsconfig.json ../../scripts/check-npm-licenses.mjs ../../.github/workflows/windows-ci.yml",
+    "lint": "eslint . --max-warnings 0",
+    "test:unit": "vitest run src",
+    "test:integration": "vitest run tests/integration",
+    "test": "npm run test:unit && npm run test:integration",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run format:check && npm run lint && npm run typecheck && npm test && npm run build",
+    "sbom": "npm sbom --sbom-format cyclonedx",
+    "tauri": "tauri",
+    "tauri:dev": "tauri dev",
+    "tauri:build": "tauri build",
+    "desktop:dev": "pwsh -NoProfile -File ../../scripts/dev.ps1",
+    "desktop:build": "pwsh -NoProfile -File ../../scripts/build.ps1"
+  },
+  "dependencies": {
+    "@phosphor-icons/react": "2.1.10",
+    "@tauri-apps/api": "2.11.1",
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@tauri-apps/cli": "2.11.4",
+    "@types/node": "26.2.0",
+    "@types/react": "19.1.10",
+    "@types/react-dom": "19.1.7",
+    "@vitejs/plugin-react": "5.0.2",
+    "eslint": "10.9.0",
+    "globals": "17.11.0",
+    "prettier": "3.9.6",
+    "typescript": "5.9.2",
+    "typescript-eslint": "8.67.0",
+    "vite": "7.3.6",
+    "vitest": "4.1.11"
+  },
+  "engines": {
+    "node": ">=24.16.0",
+    "npm": ">=11.9.0"
+  }
+}

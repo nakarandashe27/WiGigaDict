@@ -1,0 +1,14 @@
+[workspace]
+
+[package]
+name = "wigigadict-golden-flow-provision"
+version = "0.0.1"
+edition = "2024"
+license = "MIT"
+publish = false
+
+[dependencies]
+ed25519-dalek = "=3.0.0"
+serde_json = "=1.0.151"
+sha2 = "=0.10.9"
+wigigadict-storage = { version = "=0.0.1", path = "../../crates/storage" }

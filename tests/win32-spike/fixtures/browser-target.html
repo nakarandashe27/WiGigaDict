@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>WiGigaDict M0 browser fixture</title>
+  </head>
+  <body>
+    <label for="target">Disposable Win32 insertion target</label>
+    <textarea id="target" autofocus rows="8" cols="80"></textarea>
+    <output id="length" aria-live="polite">0</output>
+    <script>
+      const target = document.querySelector("#target");
+      const length = document.querySelector("#length");
+      const marker = "WiGigaDict_M0_Привет";
+      target.addEventListener("input", () => {
+        length.textContent = String(target.value.length);
+        if (target.value === marker) {
+          document.title = "WiGigaDict M0 browser fixture [ack]";
+        }
+      });
+      target.focus();
+    </script>
+  </body>
+</html>

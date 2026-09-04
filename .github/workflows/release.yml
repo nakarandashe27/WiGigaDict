@@ -1,0 +1,104 @@
+name: Release
+
+# Тег вида v0.0.1 собирает установщик и публикует релиз с активами.
+# Каталог моделей выкладывается тем же релизом: приложение получает стабильный адрес,
+# по которому его можно обновить, а подпись проверяется вшитым в сборку публичным ключом.
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Existing version tag to publish (for example v0.0.1)"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Windows installer
+    runs-on: windows-2025
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ inputs.tag || github.ref }}
+
+      - name: Set up pinned Node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: 24.16.0
+          cache: npm
+          cache-dependency-path: apps/desktop/package-lock.json
+
+      - name: Set up pinned Rust
+        shell: pwsh
+        run: >-
+          rustup toolchain install 1.97.1-x86_64-pc-windows-msvc
+          --profile minimal
+          --target x86_64-pc-windows-msvc
+
+      - name: Install locked JavaScript dependencies
+        shell: pwsh
+        run: npm ci --prefix apps/desktop
+
+      - name: Install pinned Vulkan SDK for the ASR worker
+        shell: pwsh
+        run: ./scripts/install-vulkan-sdk.ps1
+
+      - name: Build installer
+        shell: pwsh
+        # Публичный ключ допустимо хранить в workflow; приватный ключ остаётся offline.
+        env:
+          WIGIGADICT_CATALOG_PUBLIC_KEY: b3b4f342c0e50a230b75c849b3bc3f48fe04fd1bf09b083c2831de081396beb0
+        run: ./scripts/build.ps1 -SkipNpmCi
+
+      - name: Collect release assets
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path release | Out-Null
+          Copy-Item target/release/bundle/nsis/*.exe -Destination release
+          Copy-Item apps/desktop/src-tauri/catalog.json -Destination release
+          Copy-Item apps/desktop/src-tauri/catalog.sig -Destination release
+          Copy-Item scripts/install-release.ps1 -Destination release/WiGigaDict-install.ps1
+          $lines = Get-ChildItem release -File | Sort-Object Name | ForEach-Object {
+            "{0}  {1}" -f (Get-FileHash $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant(), $_.Name
+          }
+          Set-Content -LiteralPath release/SHA256SUMS.txt -Value $lines -Encoding ascii
+          Get-Content release/SHA256SUMS.txt
+
+      - name: Publish release
+        shell: pwsh
+        # gh есть на раннере: сторонний action ради одной команды не нужен.
+        # Всё, что до 1.0, помечается предрелизом — установщик пока не подписан.
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $tag = if ("${{ github.event_name }}" -eq "workflow_dispatch") {
+            "${{ inputs.tag }}"
+          } else {
+            "${{ github.ref_name }}"
+          }
+          $packageVersion = (Get-Content apps/desktop/src-tauri/tauri.conf.json -Raw | ConvertFrom-Json).version
+          if ($tag -ne "v$packageVersion") {
+            throw "Release tag $tag does not match package version v$packageVersion"
+          }
+          $assets = @(Get-ChildItem release -File | ForEach-Object { $_.FullName })
+          $notes = "Установщик не подписан: Windows покажет предупреждение о неизвестном издателе. " +
+            "Сверьте загруженные файлы с SHA256SUMS.txt. Доступны обычный installer, " +
+            "проверяемый PowerShell helper и автоматически созданные GitHub архивы исходников."
+          if (gh release view $tag 2>$null) {
+            gh release upload $tag @assets --clobber
+            gh release edit $tag --title $tag --notes $notes
+          } else {
+            $arguments = @("release", "create", $tag) + $assets + @(
+              "--verify-tag", "--title", $tag, "--notes", $notes
+            )
+            if ($tag -notmatch "^v[1-9]") { $arguments += "--prerelease" }
+            & gh @arguments
+          }

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "candidate": "whisper.cpp-official",
+  "format": "ggml",
+  "source_repository": "ggerganov/whisper.cpp",
+  "source_revision": "5359861c739e955e79d9a303bcbc70fb988958b1",
+  "adapter": "transcribe-rs=0.3.11",
+  "artifacts": [
+    {
+      "profile": "large-v3-turbo-q5_0",
+      "filename": "ggml-large-v3-turbo-q5_0.bin",
+      "bytes": 574041195,
+      "sha256": "394221709cd5ad1f40c46e6031ca61bce88931e6e088c188294c6d5a55ffa7e2"
+    },
+    {
+      "profile": "small-q5_1",
+      "filename": "ggml-small-q5_1.bin",
+      "bytes": 190085487,
+      "sha256": "ae85e4a935d7a567bd102fe55afc16bb595bdb618e11b2fc7591bc08120411bb"
+    }
+  ],
+  "status": "benchmark_only"
+}

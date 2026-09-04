@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-21",
+  "harness_version": "0.0.1",
+  "environment": {
+    "os_family": "Windows 10",
+    "display_version": "22H2",
+    "build": "19045.6456",
+    "architecture": "x86_64"
+  },
+  "fixture": {
+    "surface": "Windows Terminal",
+    "application": "Claude Code",
+    "application_version": "2.1.239",
+    "disposable_prompt": true,
+    "probe_launch": "user_initiated"
+  },
+  "observer": {
+    "kind": "manual_screenshot",
+    "exact_marker_acknowledged": false,
+    "visible_result": "corrupted_glyphs",
+    "submission_attempted": false
+  },
+  "assessment": {
+    "overlay_precondition_before_insertion": "passed_by_harness_control_flow",
+    "native_report_available": false,
+    "delivery_status": "uncertain",
+    "automatic_retry_attempted": false,
+    "automatic_fallback_attempted": false,
+    "compatibility_rule_created": false
+  },
+  "screenshot_committed": false,
+  "content_logged": false,
+  "result": "observed_uncertain"
+}

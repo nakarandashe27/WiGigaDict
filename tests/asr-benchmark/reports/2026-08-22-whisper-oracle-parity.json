@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-22",
+  "status": "passed",
+  "scope": "Benchmark-only adapter parity; this is not a production engine selection.",
+  "oracle": {
+    "project": "ggml-org/whisper.cpp",
+    "release": "v1.8.3",
+    "source_commit": "2eeeba56e9edd762b4b38467bab96c2517163158",
+    "adapter_binding": "whisper-rs-sys 0.15.0",
+    "adapter_binding_repository_commit": "7558e1b72f54f2f22a53589afb77e65681834c36",
+    "source_files_compared": 778,
+    "normalized_file_mismatches": 0,
+    "normalized_tree_sha256": "e57f13dc496ed60afabe698aeb047b065e640cf01464522fec6035cba48faab2",
+    "cli_bytes": 57303552,
+    "cli_sha256": "986ad0eb1026dcf3ef74f38c1678ad691e4b36b5d3e208499c51dcbbc2b341cc",
+    "cmake_cxx_flags": "/utf-8 /EHsc",
+    "vulkan_sdk": "1.4.357.0"
+  },
+  "adapter": {
+    "package": "transcribe-rs 0.3.11 / whisper-rs 0.16.0",
+    "worker_bytes": 57008128,
+    "worker_sha256": "242a98dc3f88fdb7ac770bbad42d451e413441c4ada8f7f7ea80a372b3d12e94",
+    "parameters": {
+      "beam_size": 3,
+      "patience": -1.0,
+      "threads": 4,
+      "flash_attention": true,
+      "no_speech_threshold": 0.2,
+      "suppress_blank": true,
+      "suppress_non_speech_tokens": true,
+      "translate": false
+    }
+  },
+  "model": {
+    "name": "ggml-large-v3-turbo-q5_0.bin",
+    "repository_commit": "5359861c739e955e79d9a303bcbc70fb988958b1",
+    "bytes": 574041195,
+    "sha256": "394221709cd5ad1f40c46e6031ca61bce88931e6e088c188294c6d5a55ffa7e2"
+  },
+  "acceptance": {
+    "exact_text_required": true,
+    "exact_segment_text_and_count_required": true,
+    "max_timestamp_delta_ms": 50,
+    "passed": true
+  },
+  "evidence": {
+    "adapter_ndjson_sha256": "4215d25a380af6df9e96bba2e991cb7af4ba15c3314e10abe630e831172ec85d",
+    "oracle_en_060_json_sha256": "be5bc765c8179c45a90155dc0673d8e66171d4da6efaa90a7993ea8f50ef429e",
+    "oracle_ru_030_json_sha256": "3a2d3c26eb83a10809dfe8a6429ef276a5ce4087fe8cdf2d6d08a6b80047c9e6"
+  },
+  "samples": [
+    {
+      "sample_id": "en-060",
+      "language": "en",
+      "audio_duration_ms": 60000,
+      "audio_sha256": "79ed8206994f5cdfe10121e049d4eecd5752042bf76d3df75957a1b7afdde0fc",
+      "text_exact": true,
+      "segment_count_adapter": 9,
+      "segment_count_oracle": 9,
+      "all_segment_text_exact": true,
+      "max_timestamp_delta_ms": 0,
+      "max_segment_end_ms": 86560,
+      "out_of_bounds_ms": 26560
+    },
+    {
+      "sample_id": "ru-030",
+      "language": "ru",
+      "audio_duration_ms": 30000,
+      "audio_sha256": "5bb73c7da5672ebd19078bc55d18b8b9aa34a276bc87baefea93ba4c412a0242",
+      "text_exact": true,
+      "segment_count_adapter": 4,
+      "segment_count_oracle": 4,
+      "all_segment_text_exact": true,
+      "max_timestamp_delta_ms": 40,
+      "max_segment_end_ms": 20720,
+      "out_of_bounds_ms": 0
+    }
+  ],
+  "warnings": [
+    "Both implementations emitted the same hallucinated 'Thank you.' segment for en-060 and ended it 26560 ms after the WAV duration.",
+    "The Russian segment boundaries differed by at most 40 ms even though text and segment count were exact.",
+    "The rejected third-party GigaAM CTC export is not an official GigaAM runtime oracle and is not promoted by this report."
+  ]
+}

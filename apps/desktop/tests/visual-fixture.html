@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WiGigaDict — visual fixture</title>
+    <link rel="icon" href="/icon.svg" />
+    <!--
+      Стенд визуальной приёмки главного окна.
+
+      Зачем: в обычном браузере главное окно показывает только заглушки —
+      Tauri-мост недоступен, команды падают, и «Историю», «Модели» и
+      «Настройки» снять нечем. Этот файл подменяет мост выдуманными данными,
+      чтобы экраны можно было сфотографировать и сверить с эталоном.
+      Оверлей снимается без него: /?window=overlay&phase=recording.
+
+      Как: npm run dev, затем
+        http://127.0.0.1:1420/tests/visual-fixture.html
+        http://127.0.0.1:1420/tests/visual-fixture.html?capture=recording
+
+      Данные вымышленные и content-free: ни одной настоящей диктовки, ни имени
+      пользователя, ни абсолютного пути. В production-сборку файл не попадает —
+      vite build собирает только index.html.
+    -->
+    <script>
+      const now = Date.now(); // бэкенд отдаёт миллисекунды
+      const capturePhase = new URLSearchParams(location.search).get("capture");
+
+      const attempt = (n, method, status, evidence, errorCode) => ({
+        attemptId: "a" + n,
+        ordinal: n,
+        method,
+        status,
+        evidenceClass: evidence,
+        errorCode: errorCode || null,
+        startedAt: now - 400000 + n * 1000,
+        completedAt: now - 399000 + n * 1000,
+      });
+
+      const operation = (attempts) => ({
+        operationId: "o1",
+        operationNo: 1,
+        initiatedBy: "user",
+        userActionId: "u1",
+        status: "completed",
+        confirmationLevel: "verified",
+        finalErrorCode: null,
+        startedAt: now - 400000,
+        completedAt: now - 390000,
+        attempts,
+      });
+
+      const transcript = (id, kind, content) => ({
+        transcriptId: id,
+        sessionId: id,
+        kind,
+        content,
+        contentHash: "h" + id,
+        createdAt: now - 400000,
+      });
+
+      const entry = (id, status, text, extra) =>
+        Object.assign(
+          {
+            sessionId: id,
+            pipelineState: "delivered",
+            stateVersion: 3,
+            status,
+            recoveryRequired: status === "uncertain",
+            raw: transcript(id, "raw", text),
+            cleaned: transcript(id, "cleaned", text),
+            selected: transcript(id, "cleaned", text),
+            operations: [
+              operation([
+                attempt(1, "sendinput", "delivered", "focus_verified"),
+                attempt(
+                  2,
+                  "clipboard",
+                  "copied",
+                  "clipboard_only",
+                  "focus_lost",
+                ),
+              ]),
+            ],
+            startedAt: now - 3600000,
+            updatedAt: now - 3500000,
+            deliveredAt: status === "delivered" ? now - 3500000 : null,
+            resolvedAt: null,
+            pinned: false,
+            retentionExpiresAt: now + 86400000 * 14,
+            lastErrorCode: null,
+          },
+          extra || {},
+        );
+
+      const fixtures = {
+        runtime_status: {
+          state: "ready",
+          protocol: "asr/v3",
+          sidecar: "wigigadict-asr-sidecar 0.0.1",
+          detail: "Готов, модель прогрета",
+        },
+
+        capture_status:
+          capturePhase === "recording"
+            ? {
+                phase: "recording",
+                sessionId: "s-live",
+                reason: null,
+                deviceHealthy: true,
+                durablePcmBytes: 512000,
+                audioGaps: 0,
+              }
+            : {
+                phase: "idle",
+                sessionId: null,
+                reason: null,
+                deviceHealthy: true,
+                durablePcmBytes: 0,
+                audioGaps: 0,
+              },
+
+        recovery_list: [
+          entry(
+            "s-1",
+            "delivered",
+            "Собери сводку по вчерашним замерам памяти и приложи её к письму для команды.",
+          ),
+          entry(
+            "s-2",
+            "uncertain",
+            "Проверь, что вставка ушла именно в поле комментария, а не в соседнюю вкладку.",
+            { pinned: true, lastErrorCode: "focus_lost" },
+          ),
+          entry("s-3", "copied", "Короткая заметка на пробу.", {
+            deliveredAt: null,
+          }),
+        ],
+
+        settings_get: {
+          configuration: {
+            configVersion: 7,
+            hotkeyBinding: "F8",
+            microphoneDeviceId: "mic-1",
+            activeRuntimeProfileId: "rp-turbo",
+            activeCleanupProfileId: "cp-1",
+            startupEnabled: true,
+            warmupEnabled: true,
+            diagnosticMode: false,
+            archiveDirectory: "C:\\Users\\Owner\\Documents\\WiGigaDict",
+          },
+          runtimeProfiles: [
+            {
+              id: "rp-turbo",
+              modelName: "whisper-large-v3-turbo",
+              modelVersion: "q5_0",
+              deviceKind: "vulkan",
+              healthState: "healthy",
+              available: true,
+            },
+            {
+              id: "rp-base",
+              modelName: "whisper-base",
+              modelVersion: "q5_1",
+              deviceKind: "cpu",
+              healthState: "healthy",
+              available: true,
+            },
+          ],
+          cleanupProfiles: [
+            { id: "cp-1", name: "Бережная очистка", profileVersion: 2 },
+          ],
+          inputDevices: [
+            {
+              id: "mic-1",
+              name: "Микрофон (Realtek Audio)",
+              isDefault: true,
+              healthy: true,
+            },
+            {
+              id: "mic-2",
+              name: "Headset (Bluetooth)",
+              isDefault: false,
+              healthy: false,
+            },
+          ],
+          inputDeviceError: null,
+          startupRegistered: true,
+        },
+
+        archive_directory_pick: "D:\\WiGigaDict Archive",
+
+        models_list: {
+          items: [
+            {
+              packageId: "pkg-turbo",
+              profileId: "rp-turbo",
+              displayName: "whisper-large-v3-turbo Q5",
+              summary:
+                "Основная модель каталога: быстрая и точная на русской речи, требует видеопамяти.",
+              languages: ["multi"],
+              licenseId: "MIT",
+              totalBytes: 547 * 1024 * 1024,
+              deviceKind: "vulkan",
+              minRamMb: 626,
+              minVramMb: 2048,
+              recommended: true,
+              ownerMeasured: true,
+              state: "installed",
+              isActive: true,
+              bytesDownloaded: 547 * 1024 * 1024,
+              healthState: "healthy",
+              inCatalog: true,
+              duplicateOf: null,
+            },
+            {
+              packageId: "pkg-medium",
+              profileId: null,
+              displayName: "whisper-medium",
+              summary:
+                "Компромисс между точностью и памятью. Работает на процессоре.",
+              languages: ["multi"],
+              licenseId: "MIT",
+              totalBytes: 1500 * 1024 * 1024,
+              deviceKind: "cpu",
+              minRamMb: 1075,
+              minVramMb: null,
+              recommended: false,
+              ownerMeasured: false,
+              state: "downloading",
+              isActive: false,
+              bytesDownloaded: 640 * 1024 * 1024,
+              healthState: null,
+              inCatalog: true,
+              duplicateOf: null,
+            },
+          ],
+          activeProfileId: "rp-turbo",
+          catalogError: null,
+          busyPackageId: "pkg-medium",
+        },
+
+        diagnostic_status: {
+          expandedEventsEnabled: false,
+          traceSchemaVersion: 3,
+          retentionDays: 14,
+          maximumBytes: 32 * 1024 * 1024,
+          fileCount: 12,
+          storedBytes: 84 * 1024,
+          eventCount: 1842,
+        },
+      };
+
+      // Подписка на события возвращает идентификатор слушателя; событий стенд
+      // не шлёт — состояние статично, значит снимок воспроизводим.
+      let callbackId = 0;
+      window.__TAURI_EVENT_PLUGIN_INTERNALS__ = {
+        unregisterListener() {},
+      };
+      window.__TAURI_INTERNALS__ = {
+        transformCallback(callback, once) {
+          const id = ++callbackId;
+          window[`_${id}`] = (value) => {
+            callback?.(value);
+            if (once) delete window[`_${id}`];
+          };
+          return id;
+        },
+        invoke(command) {
+          if (command.startsWith("plugin:event|")) return Promise.resolve(1);
+          if (command in fixtures) return Promise.resolve(fixtures[command]);
+          return Promise.resolve(null);
+        },
+      };
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

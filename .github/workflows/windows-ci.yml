@@ -1,0 +1,80 @@
+name: Windows quality and internal artifact
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: windows-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  windows:
+    name: Windows 2025 / locked toolchain
+    runs-on: windows-2025
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+
+      - name: Set up pinned Node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: 24.16.0
+          cache: npm
+          cache-dependency-path: apps/desktop/package-lock.json
+
+      - name: Set up pinned Rust
+        shell: pwsh
+        run: >-
+          rustup toolchain install 1.97.1-x86_64-pc-windows-msvc
+          --profile minimal
+          --component rustfmt
+          --component clippy
+          --target x86_64-pc-windows-msvc
+
+      - name: Install locked JavaScript dependencies
+        shell: pwsh
+        run: npm ci --prefix apps/desktop
+
+      - name: Install pinned Vulkan SDK for the ASR worker
+        shell: pwsh
+        run: ./scripts/install-vulkan-sdk.ps1
+
+      - name: Install exact supply-chain tools
+        shell: pwsh
+        run: |
+          cargo install cargo-deny --version 0.20.2 --locked
+          cargo install cargo-cyclonedx --version 0.5.9 --locked
+
+      - name: Run quality and contract gates
+        shell: pwsh
+        run: ./scripts/quality.ps1 -SkipNpmCi
+
+      - name: Generate and verify supply-chain reports
+        shell: pwsh
+        run: ./scripts/supply-chain.ps1
+
+      - name: Build unsigned internal NSIS artifact
+        shell: pwsh
+        # Публичный ключ не является секретом. Приватный ключ подписи каталога
+        # никогда не попадает ни в репозиторий, ни в CI.
+        env:
+          WIGIGADICT_CATALOG_PUBLIC_KEY: b3b4f342c0e50a230b75c849b3bc3f48fe04fd1bf09b083c2831de081396beb0
+        run: ./scripts/build.ps1 -SkipNpmCi
+
+      - name: Publish unsigned internal artifact and reports
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: wigigadict-v0.0.1-dev-windows-x64-unsigned-internal
+          if-no-files-found: error
+          retention-days: 14
+          path: |
+            target/release/bundle/nsis/*.exe
+            target/release/wigigadict-asr-sidecar.exe
+            artifacts/reports/**

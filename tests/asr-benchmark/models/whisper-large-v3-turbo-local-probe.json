@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "candidate": "whisper-large-v3-turbo",
+  "format": "ggml",
+  "source_cache_repository": "unslothai/whisper-large-v3-turbo-GGUF",
+  "source_cache_revision": "325c85b683627d65ea72d90b5d627d8de1a78d80",
+  "filename": "whisper-large-v3-turbo.bin",
+  "bytes": 1624555275,
+  "sha256": "0dc8bab01bd6b0ab68e8ebb607bf3c960ff1bc136644a23b3ad59f7c00e78d09",
+  "status": "benchmark_probe_only",
+  "warning": "This local artifact differs from the official whisper.cpp large-v3-turbo LFS SHA-256 and is not approved for production packaging."
+}

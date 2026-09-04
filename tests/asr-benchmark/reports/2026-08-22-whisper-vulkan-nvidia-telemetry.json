@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "measurement_scope": "whole benchmark worker process; model load, optional warmup and measured inference",
+  "telemetry_source": "nvidia-smi",
+  "gpu": {
+    "index": 0,
+    "name": "NVIDIA GeForce RTX 5070 Laptop GPU",
+    "uuid": "GPU-0fe75846-4b68-d806-ff74-bd6d7677cee0",
+    "driver_version": "596.13"
+  },
+  "idle": {
+    "sample_count": 15,
+    "average_power_watts": 4.2373,
+    "average_memory_mib": 0.0
+  },
+  "poll_milliseconds": 100,
+  "benchmark_binary": "C:\\Local WhisperGigaAM Desktop\\.t\\release\\wigigadict-asr-benchmark.exe",
+  "benchmark_arguments": [
+    "run-whisper",
+    "--model",
+    "C:\\Local WhisperGigaAM Desktop\\tests\\asr-benchmark\\private\\models\\whisper.cpp\\5359861c739e955e79d9a303bcbc70fb988958b1\\ggml-large-v3-turbo-q5_0.bin",
+    "--audio",
+    "C:\\Local WhisperGigaAM Desktop\\tests\\asr-benchmark\\generated\\en-060.wav",
+    "--sample",
+    "en-060",
+    "--language",
+    "en",
+    "--profile",
+    "gpu",
+    "--mode",
+    "warm",
+    "--output",
+    "C:\\Local WhisperGigaAM Desktop\\tests\\asr-benchmark\\evidence\\whisper-vulkan-nvidia-telemetry.ndjson"
+  ],
+  "runs": [
+    {
+      "repetition": 1,
+      "started_at_utc": "2026-08-22T11:26:26.2985810+00:00",
+      "elapsed_ms": 2617.468,
+      "telemetry_samples": 17,
+      "average_power_watts": 25.4006,
+      "average_incremental_watts": 18.9881,
+      "incremental_energy_kwh": 1.38058E-05,
+      "peak_memory_mib": 884.0,
+      "peak_incremental_vram_bytes": 926941184,
+      "stdout_log": "C:\\Local WhisperGigaAM Desktop\\logs\\asr-whisper-nvidia-telemetry-processes\\run-01.stdout.log",
+      "stderr_log": "C:\\Local WhisperGigaAM Desktop\\logs\\asr-whisper-nvidia-telemetry-processes\\run-01.stderr.log"
+    },
+    {
+      "repetition": 2,
+      "started_at_utc": "2026-08-22T11:26:28.9490056+00:00",
+      "elapsed_ms": 2550.997,
+      "telemetry_samples": 17,
+      "average_power_watts": 33.3465,
+      "average_incremental_watts": 27.0311,
+      "incremental_energy_kwh": 1.91545E-05,
+      "peak_memory_mib": 884.0,
+      "peak_incremental_vram_bytes": 926941184,
+      "stdout_log": "C:\\Local WhisperGigaAM Desktop\\logs\\asr-whisper-nvidia-telemetry-processes\\run-02.stdout.log",
+      "stderr_log": "C:\\Local WhisperGigaAM Desktop\\logs\\asr-whisper-nvidia-telemetry-processes\\run-02.stderr.log"
+    },
+    {
+      "repetition": 3,
+      "started_at_utc": "2026-08-22T11:26:31.5015426+00:00",
+      "elapsed_ms": 2757.232,
+      "telemetry_samples": 17,
+      "average_power_watts": 36.4288,
+      "average_incremental_watts": 31.4651,
+      "incremental_energy_kwh": 2.40991E-05,
+      "peak_memory_mib": 884.0,
+      "peak_incremental_vram_bytes": 926941184,
+      "stdout_log": "C:\\Local WhisperGigaAM Desktop\\logs\\asr-whisper-nvidia-telemetry-processes\\run-03.stdout.log",
+      "stderr_log": "C:\\Local WhisperGigaAM Desktop\\logs\\asr-whisper-nvidia-telemetry-processes\\run-03.stderr.log"
+    },
+    {
+      "repetition": 4,
+      "started_at_utc": "2026-08-22T11:26:34.2599362+00:00",
+      "elapsed_ms": 2577.842,
+      "telemetry_samples": 17,
+      "average_power_watts": 34.2329,
+      "average_incremental_watts": 27.9744,
+      "incremental_energy_kwh": 2.00315E-05,
+      "peak_memory_mib": 884.0,
+      "peak_incremental_vram_bytes": 926941184,
+      "stdout_log": "C:\\Local WhisperGigaAM Desktop\\logs\\asr-whisper-nvidia-telemetry-processes\\run-04.stdout.log",
+      "stderr_log": "C:\\Local WhisperGigaAM Desktop\\logs\\asr-whisper-nvidia-telemetry-processes\\run-04.stderr.log"
+    },
+    {
+      "repetition": 5,
+      "started_at_utc": "2026-08-22T11:26:36.8389116+00:00",
+      "elapsed_ms": 2656.312,
+      "telemetry_samples": 17,
+      "average_power_watts": 36.0288,
+      "average_incremental_watts": 29.7024,
+      "incremental_energy_kwh": 2.19163E-05,
+      "peak_memory_mib": 884.0,
+      "peak_incremental_vram_bytes": 926941184,
+      "stdout_log": "C:\\Local WhisperGigaAM Desktop\\logs\\asr-whisper-nvidia-telemetry-processes\\run-05.stdout.log",
+      "stderr_log": "C:\\Local WhisperGigaAM Desktop\\logs\\asr-whisper-nvidia-telemetry-processes\\run-05.stderr.log"
+    }
+  ]
+}

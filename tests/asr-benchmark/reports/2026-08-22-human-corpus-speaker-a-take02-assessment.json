@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "assessment": "benchmark_only",
+  "corpus_id": "wigigadict-human-speaker-a-takes01-04",
+  "privacy": {
+    "raw_audio_versioned": false,
+    "raw_transcripts_versioned": false,
+    "full_local_paths_versioned": false
+  },
+  "capture_tool": {
+    "name": "ffmpeg",
+    "version": "8.1.1",
+    "sha256": "09948D4CDD0650DA6FF5A87577469F2A218DC2615AE379F8F734D24C49DE0F73",
+    "production_bundle_approved": false,
+    "warning_code": "capture_only_gpl_build"
+  },
+  "recorder": {
+    "script": "scripts/record-asr-human-corpus.ps1",
+    "sha256": "B6B24C6FDC2FB7FB595038CF11733DCC634606A31B7B8F7D42CAE7F0EEF17A5C",
+    "minimum_powershell": "7.4",
+    "signal_preflight_threshold_max_db": -50.0,
+    "selection_tail_padding_ms": 3000
+  },
+  "takes": [
+    {
+      "take": 1,
+      "accepted": false,
+      "failure_codes": [
+        "legacy_recorder_provenance_prompt_capture",
+        "signal_below_threshold"
+      ],
+      "wav_count": 10,
+      "total_duration_ms": 269933,
+      "total_wav_bytes": 8638296,
+      "observed_peak_max_db": -90.3,
+      "provenance_sha256": "13C87C4202BB4681BA5ADB780A9B822E6C68DE694A659139D501579E125D6490"
+    },
+    {
+      "take": 2,
+      "accepted": true,
+      "selection_quality_boundary_clear": false,
+      "failure_codes": [
+        "active_tail_boundary_confounds"
+      ],
+      "wav_count": 10,
+      "total_duration_ms": 269841,
+      "total_wav_bytes": 8635352,
+      "signal_preflight_mean_db": -21.5,
+      "signal_preflight_max_db": -2.6,
+      "sample_peak_range_db": [
+        -3.3,
+        -1.5
+      ],
+      "provenance_sha256": "BC37E259763E569341547C7F1A9DA24D3E5B0DF1FB876620F4807CA6CCE0DB63",
+      "active_tail_samples": [
+        "ru-005",
+        "en-005"
+      ]
+    },
+    {
+      "take": 3,
+      "accepted": true,
+      "selection_quality_boundary_clear": false,
+      "failure_codes": [
+        "active_tail_boundary_confounds"
+      ],
+      "wav_count": 10,
+      "total_duration_ms": 269844,
+      "total_wav_bytes": 8635448,
+      "sample_peak_range_db": [
+        -3.1,
+        -1.5
+      ],
+      "provenance_sha256": "5AD14615DE9B8D3BFCED898DCA803ADC339CFE5D3CF4CADC35472D5B508CD17B",
+      "active_tail_samples": [
+        "ru-005",
+        "ru-025",
+        "ru-060",
+        "en-005",
+        "en-015",
+        "en-025",
+        "en-030"
+      ]
+    },
+    {
+      "take": 4,
+      "accepted": true,
+      "selection_quality_boundary_clear": true,
+      "failure_codes": [],
+      "schema_version": 2,
+      "tail_padding_ms": 3000,
+      "wav_count": 10,
+      "total_duration_ms": 299841,
+      "total_wav_bytes": 9595352,
+      "sample_peak_range_db": [
+        -3.3,
+        -2.8
+      ],
+      "provenance_sha256": "4CA9F280A0B26C9F3A652D7E4B6825CA094CC12506A276AC5FF2CAE16325FED8",
+      "active_tail_samples": []
+    }
+  ],
+  "accepted_take_invariants": {
+    "expected_wav_count": 10,
+    "actual_wav_count": 10,
+    "format": "pcm_s16le",
+    "sample_rate_hz": 16000,
+    "channels": 1,
+    "hashes_verified": true,
+    "temporary_preflight_audio_remaining": false
+  },
+  "tail_signal_observations": {
+    "active_speech_in_final_second": [
+      "ru-005",
+      "en-005"
+    ],
+    "interpretation": "marker misses for these exact-duration captures cannot be attributed solely to ASR"
+  },
+  "benchmark_reports": [
+    {
+      "profile": "gpu",
+      "report": "tests/asr-benchmark/reports/2026-08-22-whisper-large-vulkan-human-speaker-a-take02.json",
+      "sha256": "1B409CB642E39F4A7BD278E5574E689EF42798D20E35CE59A7EF661A11134E0E"
+    },
+    {
+      "profile": "cpu-t16",
+      "report": "tests/asr-benchmark/reports/2026-08-22-whisper-vulkan-capable-cpu-t16-human-speaker-a-take02.json",
+      "sha256": "54D72D9414C878D2172632DF5251582448D8F30FCB1BE16C4F9946A48C1959C8"
+    },
+    {
+      "profile": "gpu",
+      "report": "tests/asr-benchmark/reports/2026-08-22-whisper-large-vulkan-human-speaker-a-take04.json",
+      "sha256": "2F4D2863D080C47BD56B7B59C00262DB774A9D74093C2A5C15F18515C522A0A1"
+    },
+    {
+      "profile": "cpu-t16",
+      "report": "tests/asr-benchmark/reports/2026-08-22-whisper-vulkan-capable-cpu-t16-human-speaker-a-take04.json",
+      "sha256": "9C62F4ED9DE1BFD39148EBE450657BE5F8715519ED6A219B61CF4415DC8AE316"
+    }
+  ],
+  "limitations": [
+    "one_pseudonymous_speaker",
+    "one_boundary_clear_take",
+    "two_boundary_confounded_takes",
+    "not_selection_quality_distribution",
+    "independent_recordings_and_clean_machine_evidence_required"
+  ]
+}

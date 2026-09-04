@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "measurement_report": "tests/asr-benchmark/reports/2026-08-22-whisper-large-cpu-t16-battery.json",
+  "measurement_report_sha256": "d490d6a99dfbf41ddd25dffd70889fbeb016a0a279a8d5537555b8e8e4aadbaa",
+  "evidence": "tests/asr-benchmark/evidence/whisper-large-cpu-t16-battery.ndjson",
+  "evidence_sha256": "1a3a0074659d8f9a5da837d50610c74f83975617555211bb7bea864cc4545f08",
+  "record_count": 3,
+  "percentile_method": "nearest_rank",
+  "power_scheme": {
+    "name": "Turbo",
+    "guid": "6fecc5ae-f350-48a5-b669-b472cb895ccf"
+  },
+  "artifacts": {
+    "benchmark_binary_sha256": "95040d0f89e44c3b9cc3e4b9a7c3bb31c4553a616997df39f32763b3f8ee7c8d",
+    "measurement_script_sha256": "c1e0d800327db4c6a14c826991aaec6b4d8734c77458378af73a2dc36dc93c1e",
+    "model_sha256": "394221709cd5ad1f40c46e6031ca61bce88931e6e088c188294c6d5a55ffa7e2",
+    "model_bytes": 574041195,
+    "audio_sha256": "79ed8206994f5cdfe10121e049d4eeecd5752042bf76d3df75957a1b7afdde0fc",
+    "audio_duration_ms": 60000
+  },
+  "profile": {
+    "engine": "whisper",
+    "runtime": "whisper.cpp-cpu",
+    "profile": "cpu-t16",
+    "mode": "warm",
+    "n_threads": 16
+  },
+  "battery_observations": {
+    "preflight": {
+      "power_online": false,
+      "discharging": true,
+      "critical": false,
+      "discharge_rate_watts": 24.688,
+      "remaining_capacity_reported": 87382,
+      "voltage_millivolts": 17157
+    },
+    "postflight": {
+      "power_online": false,
+      "discharging": true,
+      "critical": false,
+      "discharge_rate_watts": 58.271,
+      "remaining_capacity_reported": 69210,
+      "voltage_millivolts": 15726
+    },
+    "idle_sample_count": 15,
+    "idle_average_whole_system_watts": 25.1077
+  },
+  "aggregates": {
+    "process_elapsed_p50_ms": 440954.071,
+    "process_elapsed_p95_ms": 445091.629,
+    "inference_p50_ms": 217217.0,
+    "inference_p95_ms": 218319.0,
+    "total_p50_ms": 220707.0,
+    "total_p95_ms": 221896.0,
+    "rtf_p50": 3.6202833333333335,
+    "rtf_p95": 3.63865,
+    "peak_ram_max_bytes": 874463232,
+    "whole_system_watts_p50": 55.5712,
+    "whole_system_watts_p95": 57.1596,
+    "incremental_watts_p50": 30.3884,
+    "incremental_watts_p95": 31.9744,
+    "whole_system_energy_p50_kwh": 0.0068538352,
+    "whole_system_energy_p95_kwh": 0.0069844324,
+    "incremental_energy_p50_kwh": 0.0037571229,
+    "incremental_energy_p95_kwh": 0.003916458
+  },
+  "invariants": {
+    "runtime_profile_thread_count_match": true,
+    "model_hash_match": true,
+    "audio_hash_match": true,
+    "text_variant_count": 1,
+    "text_sha256": "1b82fd7525e7495e66cef3d86a400ac7bfc8871a677401fe2f9bc54cf246b4bc",
+    "monotonic_segments": true,
+    "stderr_error_pattern_matches": 0,
+    "max_segment_end_ms": 86520,
+    "out_of_bounds_ms": 26520,
+    "hallucinated_suffix": "Thank you."
+  },
+  "gate_assessment": {
+    "supporting_whole_system_power_evidence": true,
+    "strict_cpu_package_or_wall_power_gate_passed": false,
+    "battery_realtime_performance_passed": false,
+    "candidate_selected": false,
+    "reasons": [
+      "BatteryStatus is whole-system DC discharge rather than CPU package or AC wall power.",
+      "BatteryStaticData capability lookup failed, so absolute rather than relative battery units cannot be independently verified.",
+      "Measured inference was slower than real time in all three battery runs.",
+      "The known out-of-bounds hallucinated suffix reproduced in all three runs."
+    ]
+  },
+  "measurement_noise": [
+    "Two brief read-only status snapshots were taken after extended periods without command output; both are preserved in logs.",
+    "The Codex desktop process and ordinary operating-system background activity remained part of the whole-system baseline.",
+    "Warm-mode process energy includes model load, one unrecorded warmup inference and one measured inference."
+  ]
+}

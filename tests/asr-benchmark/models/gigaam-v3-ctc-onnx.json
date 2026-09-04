@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "candidate": "gigaam-v3-ctc",
+  "format": "onnx",
+  "source_repository": "istupakov/gigaam-v3-onnx",
+  "source_revision": "322c3b29492673eb7d0b434bfa9dfb8653e34d02",
+  "source_license": "MIT",
+  "adapter": "transcribe-rs=0.3.11",
+  "artifacts": [
+    {
+      "source_filename": "v3_ctc.int8.onnx",
+      "runtime_filename": "model.int8.onnx",
+      "bytes": 224721181,
+      "sha256": "ceb61454e2e1a2dec5872cbac1de0fe0a4271d1148f6b26b5bda53ff30a12acd"
+    },
+    {
+      "source_filename": "v3_ctc.onnx",
+      "runtime_filename": "model.onnx",
+      "bytes": 885264128,
+      "sha256": "1fb978d4f41e1334003fae9d29f2d9844d4132315a90553a4b986839051ba9d3"
+    },
+    {
+      "source_filename": "v3_vocab.txt",
+      "runtime_filename": "vocab.txt",
+      "bytes": 198,
+      "sha256": "a9143c30844d3c0bee3e9e927e4084774eb1b9eeaafc473b2c4521e4911a7c07"
+    },
+    {
+      "source_filename": "LICENSE.txt",
+      "runtime_filename": "LICENSE.txt",
+      "bytes": 1070,
+      "sha256": "f00de6715714c7a63d08639cdbfaa40224eefc407302614bd19f1a8b98c875aa"
+    }
+  ],
+  "status": "benchmark_only"
+}

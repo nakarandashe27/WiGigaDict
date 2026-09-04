@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "measurement_scope": "whole benchmark worker process on battery; model load, optional warmup and measured inference",
+  "telemetry_source": "root/wmi BatteryStatus.DischargeRate",
+  "units": "battery-reported milliwatts converted to watts",
+  "limitation": "Whole-system battery discharge, not CPU package power. Microsoft documents milliwatts unless the battery reports relative units; BatteryStaticData capability lookup fails on this machine, so absolute-unit capability is not independently verified.",
+  "idle": {
+    "sample_count": 15,
+    "average_whole_system_watts": 25.1077
+  },
+  "poll_milliseconds": 1000,
+  "benchmark_binary": "C:\\Local WhisperGigaAM Desktop\\.t\\release\\wigigadict-asr-benchmark.exe",
+  "benchmark_arguments": [
+    "run-whisper",
+    "--model",
+    "C:\\Local WhisperGigaAM Desktop\\tests\\asr-benchmark\\private\\models\\whisper.cpp\\5359861c739e955e79d9a303bcbc70fb988958b1\\ggml-large-v3-turbo-q5_0.bin",
+    "--audio",
+    "C:\\Local WhisperGigaAM Desktop\\tests\\asr-benchmark\\generated\\en-060.wav",
+    "--sample",
+    "en-060-battery",
+    "--language",
+    "en",
+    "--profile",
+    "cpu-t16",
+    "--mode",
+    "warm",
+    "--threads",
+    "16",
+    "--output",
+    "C:\\Local WhisperGigaAM Desktop\\tests\\asr-benchmark\\evidence\\whisper-large-cpu-t16-battery.ndjson"
+  ],
+  "runs": [
+    {
+      "repetition": 1,
+      "started_at_utc": "2026-08-22T13:01:51.2726160+00:00",
+      "elapsed_ms": 424640.747,
+      "telemetry_samples": 401,
+      "average_whole_system_watts": 53.0164,
+      "average_incremental_watts": 27.8782,
+      "whole_system_energy_kwh": 0.0062423356,
+      "incremental_energy_kwh": 0.003288394,
+      "capacity_delta_reported": 3209.0,
+      "stdout_log": "C:\\Local WhisperGigaAM Desktop\\tests\\asr-benchmark\\reports\\2026-08-22-whisper-large-cpu-t16-battery-process-logs\\run-01.stdout.log",
+      "stderr_log": "C:\\Local WhisperGigaAM Desktop\\tests\\asr-benchmark\\reports\\2026-08-22-whisper-large-cpu-t16-battery-process-logs\\run-01.stderr.log"
+    },
+    {
+      "repetition": 2,
+      "started_at_utc": "2026-08-22T13:08:56.1303587+00:00",
+      "elapsed_ms": 445091.629,
+      "telemetry_samples": 420,
+      "average_whole_system_watts": 55.5712,
+      "average_incremental_watts": 30.3884,
+      "whole_system_energy_kwh": 0.0068538352,
+      "incremental_energy_kwh": 0.0037571229,
+      "capacity_delta_reported": 7314.0,
+      "stdout_log": "C:\\Local WhisperGigaAM Desktop\\tests\\asr-benchmark\\reports\\2026-08-22-whisper-large-cpu-t16-battery-process-logs\\run-02.stdout.log",
+      "stderr_log": "C:\\Local WhisperGigaAM Desktop\\tests\\asr-benchmark\\reports\\2026-08-22-whisper-large-cpu-t16-battery-process-logs\\run-02.stderr.log"
+    },
+    {
+      "repetition": 3,
+      "started_at_utc": "2026-08-22T13:16:21.2596575+00:00",
+      "elapsed_ms": 440954.071,
+      "telemetry_samples": 417,
+      "average_whole_system_watts": 57.1596,
+      "average_incremental_watts": 31.9744,
+      "whole_system_energy_kwh": 0.0069844324,
+      "incremental_energy_kwh": 0.003916458,
+      "capacity_delta_reported": 7649.0,
+      "stdout_log": "C:\\Local WhisperGigaAM Desktop\\tests\\asr-benchmark\\reports\\2026-08-22-whisper-large-cpu-t16-battery-process-logs\\run-03.stdout.log",
+      "stderr_log": "C:\\Local WhisperGigaAM Desktop\\tests\\asr-benchmark\\reports\\2026-08-22-whisper-large-cpu-t16-battery-process-logs\\run-03.stderr.log"
+    }
+  ]
+}

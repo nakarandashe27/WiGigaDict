@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-21",
+  "harness_version": "0.0.1",
+  "environment": {
+    "os_family": "Windows 10",
+    "display_version": "22H2",
+    "build": "19045.6456",
+    "architecture": "x86_64",
+    "integrity": "medium"
+  },
+  "fixture": {
+    "process_name": "chrome.exe",
+    "process_version": "151.0.7922.173",
+    "window_class": "Chrome_WidgetWin_1",
+    "control_class": "Chrome_WidgetWin_1",
+    "isolated_profile": true,
+    "origin": "loopback"
+  },
+  "checks": {
+    "overlay_noactivate_100_cycles": "pass",
+    "overlay_focus_steals": 0,
+    "unicode_packet_expected_units": 40,
+    "unicode_packet_accepted_units": 40,
+    "target_retained_after_input": true,
+    "observer": "window_title_marker",
+    "observer_acknowledged": true,
+    "automatic_fallback_attempted": false
+  },
+  "compatibility_rule_created": false,
+  "content_logged": false,
+  "result": "pass"
+}

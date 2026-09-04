@@ -1,0 +1,13 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "main",
+  "description": "Main settings/history shell: app commands remain Rust-authorized by caller label.",
+  "windows": ["main"],
+  "permissions": [
+    "core:event:allow-listen",
+    "core:event:allow-unlisten",
+    "core:window:allow-is-visible",
+    "core:window:allow-show",
+    "core:window:allow-hide"
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "evidence": "tests/asr-benchmark/evidence/whisper-vulkan-nvidia-telemetry.ndjson",
+  "corpus_id": "wigigadict-sapi-smoke-v1",
+  "record_count": 5,
+  "model_hashes": [
+    "394221709cd5ad1f40c46e6031ca61bce88931e6e088c188294c6d5a55ffa7e2"
+  ],
+  "audio_hashes": [
+    "79ed8206994f5cdfe10121e049d4eecd5752042bf76d3df75957a1b7afdde0fc"
+  ],
+  "model_bytes": [
+    574041195
+  ],
+  "percentile_method": "nearest_rank",
+  "groups": [
+    {
+      "engine": "whisper",
+      "profile": "gpu",
+      "mode": "warm",
+      "count": 5,
+      "inference_p50_ms": 693.0,
+      "inference_p95_ms": 695.0,
+      "rtf_p50": 0.01155,
+      "rtf_p95": 0.011583333333333333,
+      "peak_ram_max_bytes": 661544960.0,
+      "mean_wer": 0.18840579710144928,
+      "mean_cer": 0.08590308370044053,
+      "technical_token_errors": 20.0,
+      "technical_token_total": 75.0,
+      "truncation_count": 0,
+      "non_monotonic_count": 0
+    }
+  ],
+  "samples": [
+    {
+      "engine": "whisper",
+      "profile": "gpu",
+      "mode": "warm",
+      "sample_id": "en-060",
+      "inference_ms": 684.0,
+      "rtf": 0.0114,
+      "peak_working_set_bytes": 660934656.0,
+      "wer": 0.18840579710144928,
+      "cer": 0.08590308370044053,
+      "technical_token_errors": 4,
+      "technical_token_total": 15,
+      "marker_present": true,
+      "monotonic_segments": true
+    },
+    {
+      "engine": "whisper",
+      "profile": "gpu",
+      "mode": "warm",
+      "sample_id": "en-060",
+      "inference_ms": 695.0,
+      "rtf": 0.011583333333333333,
+      "peak_working_set_bytes": 660787200.0,
+      "wer": 0.18840579710144928,
+      "cer": 0.08590308370044053,
+      "technical_token_errors": 4,
+      "technical_token_total": 15,
+      "marker_present": true,
+      "monotonic_segments": true
+    },
+    {
+      "engine": "whisper",
+      "profile": "gpu",
+      "mode": "warm",
+      "sample_id": "en-060",
+      "inference_ms": 686.0,
+      "rtf": 0.011433333333333334,
+      "peak_working_set_bytes": 661536768.0,
+      "wer": 0.18840579710144928,
+      "cer": 0.08590308370044053,
+      "technical_token_errors": 4,
+      "technical_token_total": 15,
+      "marker_present": true,
+      "monotonic_segments": true
+    },
+    {
+      "engine": "whisper",
+      "profile": "gpu",
+      "mode": "warm",
+      "sample_id": "en-060",
+      "inference_ms": 693.0,
+      "rtf": 0.01155,
+      "peak_working_set_bytes": 661467136.0,
+      "wer": 0.18840579710144928,
+      "cer": 0.08590308370044053,
+      "technical_token_errors": 4,
+      "technical_token_total": 15,
+      "marker_present": true,
+      "monotonic_segments": true
+    },
+    {
+      "engine": "whisper",
+      "profile": "gpu",
+      "mode": "warm",
+      "sample_id": "en-060",
+      "inference_ms": 694.0,
+      "rtf": 0.011566666666666666,
+      "peak_working_set_bytes": 661544960.0,
+      "wer": 0.18840579710144928,
+      "cer": 0.08590308370044053,
+      "technical_token_errors": 4,
+      "technical_token_total": 15,
+      "marker_present": true,
+      "monotonic_segments": true
+    }
+  ]
+}

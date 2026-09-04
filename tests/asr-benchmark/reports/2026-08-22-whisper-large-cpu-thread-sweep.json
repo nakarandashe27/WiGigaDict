@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-22",
+  "status": "t16_selected_for_full_benchmark",
+  "scope": "Benchmark-only CPU thread tuning on one deterministic five-second fixture.",
+  "worker": {
+    "features": "whisper-cpu",
+    "sha256": "95040d0f89e44c3b9cc3e4b9a7c3bb31c4553a616997df39f32763b3f8ee7c8d"
+  },
+  "model": {
+    "name": "ggml-large-v3-turbo-q5_0.bin",
+    "sha256": "394221709cd5ad1f40c46e6031ca61bce88931e6e088c188294c6d5a55ffa7e2"
+  },
+  "audio": {
+    "sample_id": "en-005",
+    "sha256": "bdd834cf72ebb4e23486981c26cde9b49a96b536b6bef1c51fcb59b246694a51"
+  },
+  "screen_cold": [
+    {
+      "n_threads": 4,
+      "inference_ms": 21940,
+      "rtf": 4.388
+    },
+    {
+      "n_threads": 8,
+      "inference_ms": 11902,
+      "rtf": 2.3804
+    },
+    {
+      "n_threads": 16,
+      "inference_ms": 9003,
+      "rtf": 1.8006
+    },
+    {
+      "n_threads": 32,
+      "inference_ms": 8385,
+      "rtf": 1.677
+    }
+  ],
+  "warm_repetitions": [
+    {
+      "n_threads": 16,
+      "inference_ms_sorted": [10011, 10101, 10123],
+      "p50_ms": 10101,
+      "p95_ms": 10123,
+      "p50_rtf": 2.0202,
+      "p95_rtf": 2.0246,
+      "unique_texts": 1
+    },
+    {
+      "n_threads": 24,
+      "inference_ms_sorted": [9292, 9699, 12999],
+      "p50_ms": 9699,
+      "p95_ms": 12999,
+      "p50_rtf": 1.9398,
+      "p95_rtf": 2.5998,
+      "unique_texts": 1
+    },
+    {
+      "n_threads": 32,
+      "inference_ms_sorted": [14692, 16408, 18251],
+      "p50_ms": 16408,
+      "p95_ms": 18251,
+      "p50_rtf": 3.2816,
+      "p95_rtf": 3.6502,
+      "unique_texts": 1
+    }
+  ],
+  "evidence": {
+    "cold_screen_ndjson_sha256": "249057443975aa539a2960d90231160c6a1171bc74a1fdb90dbabf82ac6ab1ab",
+    "warm_repeat_ndjson_sha256": "8bf57d90fa5dc76fc2294019216db4e93814c33305f3aa1a9a3ed714441505f6"
+  },
+  "decision": {
+    "full_matrix_thread_count": 16,
+    "reason": "Lowest stable warm p95; 24 threads had a 12999 ms outlier and 32 threads regressed after warmup.",
+    "production_selected": false
+  }
+}
