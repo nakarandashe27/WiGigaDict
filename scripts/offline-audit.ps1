@@ -26,6 +26,7 @@ $primaryRuntimeSources = @(
   "crates/protocol/src/message.rs"
 )
 $forbiddenNetworkPattern = '(reqwest|TcpStream|UdpSocket|WebSocket|ureq|hyper::|Client::builder)'
+$networkInventoryPattern = '(reqwest|TcpStream|UdpSocket|WebSocket|ureq|hyper::)'
 foreach ($relativePath in $primaryRuntimeSources) {
   $source = Get-Content -Raw -LiteralPath (Join-Path $repoRoot $relativePath)
   if ($source -match $forbiddenNetworkPattern) {
@@ -38,15 +39,16 @@ if ($desktopManifest -match '(?m)^[ ]*(reqwest|hyper|ureq|tokio-tungstenite)[ ]*
   throw "Desktop shell must not depend directly on a network client"
 }
 
-$nativePreference = $PSNativeCommandUseErrorActionPreference
-$PSNativeCommandUseErrorActionPreference = $false
-$networkSites = rg -l --glob "*.rs" '(reqwest|TcpStream|UdpSocket|WebSocket|ureq|hyper::)' crates apps/desktop/src-tauri/src
-$rgExitCode = $LASTEXITCODE
-$PSNativeCommandUseErrorActionPreference = $nativePreference
-
-if ($rgExitCode -notin @(0, 1)) {
-  throw "Network source inventory failed"
-}
+$networkSites = @(
+  Get-ChildItem -LiteralPath @(
+    (Join-Path $repoRoot "crates"),
+    (Join-Path $repoRoot "apps/desktop/src-tauri/src")
+  ) -Recurse -File -Filter "*.rs" |
+    Where-Object {
+      Select-String -LiteralPath $_.FullName -Pattern $networkInventoryPattern -CaseSensitive -Quiet
+    } |
+    ForEach-Object { [IO.Path]::GetRelativePath($repoRoot, $_.FullName) }
+)
 $unexpectedSites = @($networkSites | Where-Object {
   $_.Replace('\', '/') -ne "crates/storage/src/model_manager.rs"
 })
