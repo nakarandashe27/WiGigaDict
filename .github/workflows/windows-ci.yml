@@ -54,7 +54,7 @@ jobs:
 
       - name: Run quality and contract gates
         shell: pwsh
-        run: ./scripts/quality.ps1 -SkipNpmCi -SkipRustTests
+        run: ./scripts/quality.ps1 -SkipNpmCi -SkipRustTests -SkipPostClippy
 
       - name: Reclaim Clippy artifacts before Rust tests
         shell: pwsh
@@ -63,6 +63,18 @@ jobs:
       - name: Run Rust unit, integration, and fault tests
         shell: pwsh
         run: cargo test --workspace --all-targets --all-features --locked
+
+      - name: Validate golden-flow thresholds
+        shell: pwsh
+        run: ./scripts/golden-flow.ps1 -CheckThresholdsOnly
+
+      - name: Run offline deny-all and marker audit
+        shell: pwsh
+        run: ./scripts/offline-audit.ps1
+
+      - name: Run TypeScript format, lint, tests, and build
+        shell: pwsh
+        run: npm run check --prefix apps/desktop
 
       - name: Install exact supply-chain tools
         shell: pwsh

@@ -1,6 +1,7 @@
 param(
   [switch]$SkipNpmCi,
-  [switch]$SkipRustTests
+  [switch]$SkipRustTests,
+  [switch]$SkipPostClippy
 )
 
 $ErrorActionPreference = "Stop"
@@ -57,6 +58,10 @@ try {
     cargo clippy --package wigigadict-desktop --bin wigigadict-desktop --all-features --locked -- -D warnings
     Write-QualityStage "rust clippy: wigigadict-desktop tests"
     cargo clippy --package wigigadict-desktop --tests --all-features --locked -- -D warnings
+  }
+  if ($SkipPostClippy) {
+    Write-Output "[quality] pre-test gates completed"
+    return
   }
   if (-not $SkipRustTests) {
     Write-QualityStage "rust unit/integration/fault tests"
