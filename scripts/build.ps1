@@ -16,6 +16,9 @@ try {
   if (-not $SkipNpmCi) {
     npm ci --prefix apps/desktop
   }
+  # `tauri::generate_context!` validates frontendDist during an ordinary Cargo build too.
+  # A clean checkout therefore needs the Vite bundle before the first desktop compilation.
+  npm run build --prefix apps/desktop
   & (Join-Path $repoRoot "scripts\create-icon.ps1")
   cargo build --package wigigadict-asr-sidecar --locked --release
   & (Join-Path $repoRoot "scripts\prepare-sidecar.ps1") -Profile release

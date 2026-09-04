@@ -22,6 +22,13 @@ try {
   . (Join-Path $PSScriptRoot "initialize-vsenv.ps1")
   Initialize-VsDevEnvironment
 
+  if (-not $SkipNpmCi) {
+    Write-QualityStage "npm clean install"
+    npm ci --prefix apps/desktop
+  }
+  Write-QualityStage "frontend bundle prerequisite"
+  npm run build --prefix apps/desktop
+
   Write-QualityStage "rust format"
   cargo fmt --all -- --check
   Write-QualityStage "prepare clean-checkout bundle inputs"
@@ -54,10 +61,6 @@ try {
   Write-QualityStage "offline deny-all and marker audit"
   & (Join-Path $PSScriptRoot "offline-audit.ps1") -SkipToolchainInit
 
-  if (-not $SkipNpmCi) {
-    Write-QualityStage "npm clean install"
-    npm ci --prefix apps/desktop
-  }
   Write-QualityStage "TypeScript format/lint/unit/integration/build"
   npm run check --prefix apps/desktop
   Write-Output "[quality] completed"

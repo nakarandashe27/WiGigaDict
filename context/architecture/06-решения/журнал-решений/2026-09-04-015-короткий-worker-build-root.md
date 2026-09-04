@@ -16,6 +16,7 @@
 - На время worker build устанавливать `CMAKE_GENERATOR=Ninja`, находить `ninja.exe` в `PATH` или в CMake tools активной Visual Studio и восстанавливать предыдущее process environment после Cargo.
 - Сохранять стабильный staging root для повторного использования Cargo/CMake cache.
 - Собирать и размещать sidecar и worker до первой компиляции Tauri desktop.
+- Создавать `apps/desktop/dist` до первой компиляции Tauri desktop: `tauri::generate_context!` проверяет `frontendDist` даже при обычных `cargo clippy` и `cargo build`.
 - В self-contained quality gate готовить bundle inputs до clippy и тестов, чтобы чистый checkout не зависел от ignored артефактов.
 
 ## Последствия
