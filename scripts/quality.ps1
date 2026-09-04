@@ -61,9 +61,6 @@ try {
     $PSNativeCommandUseErrorActionPreference = $nativePreference
     $ErrorActionPreference = $errorPreference
   }
-  foreach ($line in $desktopBinOutput) {
-    Write-Output $line.ToString()
-  }
   if ($desktopBinExitCode -ne 0) {
     $desktopBinText = $desktopBinOutput -join [Environment]::NewLine
     $category = if ($desktopBinText -match '(?i)(frontendDist|frontend dist)') {
@@ -86,6 +83,9 @@ try {
     }
     if ($env:GITHUB_ACTIONS) {
       Write-Output "::error title=WiGigaDict desktop bin category::$category"
+    }
+    foreach ($line in @($desktopBinOutput)) {
+      Write-Host ([string]$line)
     }
     throw "Desktop binary Clippy failed ($category)."
   }
