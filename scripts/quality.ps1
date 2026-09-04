@@ -49,7 +49,44 @@ try {
   Write-QualityStage "rust clippy: wigigadict-desktop lib"
   cargo clippy --package wigigadict-desktop --lib --all-features --locked -- -D warnings
   Write-QualityStage "rust clippy: wigigadict-desktop bin"
-  cargo clippy --package wigigadict-desktop --bin wigigadict-desktop --all-features --locked -- -D warnings
+  $nativePreference = $PSNativeCommandUseErrorActionPreference
+  $errorPreference = $ErrorActionPreference
+  try {
+    $PSNativeCommandUseErrorActionPreference = $false
+    $ErrorActionPreference = "Continue"
+    $desktopBinOutput = & cargo clippy --package wigigadict-desktop --bin wigigadict-desktop --all-features --locked -- -D warnings 2>&1
+    $desktopBinExitCode = $LASTEXITCODE
+  }
+  finally {
+    $PSNativeCommandUseErrorActionPreference = $nativePreference
+    $ErrorActionPreference = $errorPreference
+  }
+  $desktopBinOutput | Write-Output
+  if ($desktopBinExitCode -ne 0) {
+    $desktopBinText = $desktopBinOutput -join [Environment]::NewLine
+    $category = if ($desktopBinText -match '(?i)(frontendDist|frontend dist)') {
+      "missing_frontend"
+    }
+    elseif ($desktopBinText -match '(?i)(externalBin|resource path|does not exist|doesn''t exist)') {
+      "missing_resource"
+    }
+    elseif ($desktopBinText -match '(?i)(LNK\d+|linking with .* failed|linker .* failed)') {
+      "linker"
+    }
+    elseif ($desktopBinText -match '(?m)^error\[E\d+\]') {
+      "rust_compile"
+    }
+    elseif ($desktopBinText -match '(?m)^error:') {
+      "compiler_or_lint"
+    }
+    else {
+      "unclassified"
+    }
+    if ($env:GITHUB_ACTIONS) {
+      Write-Output "::error title=WiGigaDict desktop bin category::$category"
+    }
+    throw "Desktop binary Clippy failed ($category)."
+  }
   Write-QualityStage "rust clippy: wigigadict-desktop tests"
   cargo clippy --package wigigadict-desktop --tests --all-features --locked -- -D warnings
   Write-QualityStage "rust unit/integration/fault tests"
