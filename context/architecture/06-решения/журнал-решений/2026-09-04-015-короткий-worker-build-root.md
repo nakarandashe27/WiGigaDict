@@ -12,7 +12,7 @@
 
 ## Решение
 
-- Всегда копировать автономный worker crate в короткий `C:\wgd-worker` перед сборкой. Скрипт отклоняет staging roots длиннее 20 символов; новое имя не смешивает cache с прежним Visual Studio generator.
+- Всегда копировать автономный worker crate в короткий `C:\wgd` перед сборкой. Скрипт отклоняет staging roots длиннее 20 символов; имя оставляет запас для внутренних путей CMake и не смешивает cache с прежним Visual Studio generator.
 - На время worker build устанавливать `CMAKE_GENERATOR=Ninja`, находить `ninja.exe` в `PATH` или в CMake tools активной Visual Studio и восстанавливать предыдущее process environment после Cargo.
 - Сохранять стабильный staging root для повторного использования Cargo/CMake cache.
 - Собирать и размещать sidecar и worker до первой компиляции Tauri desktop.

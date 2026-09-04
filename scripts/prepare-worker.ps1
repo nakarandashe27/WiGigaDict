@@ -12,7 +12,7 @@
   Requires the Vulkan SDK; VULKAN_SDK must be set.
 #>
 param(
-  [string]$StagingRoot = "C:\wgd-worker"
+  [string]$StagingRoot = "C:\wgd"
 )
 
 $ErrorActionPreference = "Stop"
