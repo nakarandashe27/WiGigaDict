@@ -68,6 +68,10 @@ jobs:
         shell: pwsh
         run: ./scripts/golden-flow.ps1 -CheckThresholdsOnly
 
+      - name: Reclaim test artifacts before offline audit
+        shell: pwsh
+        run: cargo clean
+
       - name: Run offline deny-all and marker audit
         shell: pwsh
         run: ./scripts/offline-audit.ps1
