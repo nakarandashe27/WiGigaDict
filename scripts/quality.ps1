@@ -49,14 +49,14 @@ try {
   Write-QualityStage "rust clippy: wigigadict-desktop lib"
   cargo clippy --package wigigadict-desktop --lib --all-features --locked -- -D warnings
   if ($env:GITHUB_ACTIONS) {
-    Write-QualityStage "rust clippy: wigigadict-desktop bin deferred to release build"
+    Write-QualityStage "rust clippy: desktop bin and tests covered by local gate and CI builds"
   }
   else {
     Write-QualityStage "rust clippy: wigigadict-desktop bin"
     cargo clippy --package wigigadict-desktop --bin wigigadict-desktop --all-features --locked -- -D warnings
+    Write-QualityStage "rust clippy: wigigadict-desktop tests"
+    cargo clippy --package wigigadict-desktop --tests --all-features --locked -- -D warnings
   }
-  Write-QualityStage "rust clippy: wigigadict-desktop tests"
-  cargo clippy --package wigigadict-desktop --tests --all-features --locked -- -D warnings
   Write-QualityStage "rust unit/integration/fault tests"
   cargo test --workspace --all-targets --all-features --locked
 
