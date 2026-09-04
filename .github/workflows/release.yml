@@ -1,6 +1,6 @@
 name: Release
 
-# Тег вида v0.0.2 собирает установщик и публикует релиз с активами.
+# Тег вида v0.0.3 собирает установщик и публикует релиз с активами.
 # Каталог моделей выкладывается тем же релизом: приложение получает стабильный адрес,
 # по которому его можно обновить, а подпись проверяется вшитым в сборку публичным ключом.
 on:
@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: "Existing version tag to publish (for example v0.0.2)"
+        description: "Existing version tag to publish (for example v0.0.3)"
         required: true
         type: string
 
@@ -89,9 +89,21 @@ jobs:
             throw "Release tag $tag does not match package version v$packageVersion"
           }
           $assets = @(Get-ChildItem release -File | ForEach-Object { $_.FullName })
-          $notes = "Установщик не подписан: Windows покажет предупреждение о неизвестном издателе. " +
-            "Сверьте загруженные файлы с SHA256SUMS.txt. Доступны обычный installer, " +
-            "проверяемый PowerShell helper и автоматически созданные GitHub архивы исходников."
+          $notes = @"
+          ## WiGigaDict personal alpha
+
+          Локальная Windows-диктовка: запись и распознавание выполняются на компьютере, а аудио (`.wav`) и расшифровки (`.txt`) сохраняются в настраиваемую папку локального архива.
+
+          ### Варианты установки
+
+          - `WiGigaDict_${packageVersion}_x64-setup.exe` — обычная per-user установка для Windows x64.
+          - `WiGigaDict-install.ps1` — загрузка нужного релиза, обязательная проверка SHA-256 и запуск installer; подходит для PowerShell и coding-agents.
+          - `Source code (zip)` / `Source code (tar.gz)` — аудит или ручная сборка по `docs/INSTALL.md`.
+
+          Скачайте `SHA256SUMS.txt` вместе с installer и сверьте хэш. Установщик пока не подписан Authenticode, поэтому Windows может показать «Неизвестный издатель»; не отключайте SmartScreen глобально.
+
+          Полные инструкции: `README.md`, `docs/INSTALL.md`, `docs/AGENT_INSTALL.md`. Модели в installer не входят и выбираются после первого запуска.
+          "@
           if (gh release view $tag 2>$null) {
             gh release upload $tag @assets --clobber
             gh release edit $tag --title $tag --notes $notes

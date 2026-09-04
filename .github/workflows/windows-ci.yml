@@ -71,7 +71,7 @@ jobs:
       - name: Publish unsigned internal artifact and reports
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: wigigadict-v0.0.2-dev-windows-x64-unsigned-internal
+          name: wigigadict-v0.0.3-dev-windows-x64-unsigned-internal
           if-no-files-found: error
           retention-days: 14
           path: |

@@ -4,15 +4,15 @@
 
 .DESCRIPTION
   ggml builds its Vulkan shader generator as a nested CMake ExternalProject, and that nested
-  configure fails with "No CMAKE_C_COMPILER could be found" whenever the build path contains a
-  space. The repository lives at "C:\Local WhisperGigaAM Desktop", so the crate is staged into a
-  space-free directory before building. A repository path without spaces builds in place and
-  costs no extra disk.
+  configure can lose the MSVC compiler when it creates a second Visual Studio generator below the
+  Cargo build. The worker crate is therefore always staged into one short, space-free directory
+  and both CMake levels use Ninja with the initialized MSVC environment. Keeping a stable staging
+  root also preserves Cargo/CMake incremental build caches.
 
   Requires the Vulkan SDK; VULKAN_SDK must be set.
 #>
 param(
-  [string]$StagingRoot = "C:\wigigadict-worker-build"
+  [string]$StagingRoot = "C:\wgd-worker"
 )
 
 $ErrorActionPreference = "Stop"
@@ -29,28 +29,54 @@ if (-not (Test-Path -LiteralPath (Join-Path $source "Cargo.toml"))) {
   throw "ASR worker crate not found at $source."
 }
 
-if ($repoRoot -match " ") {
-  Write-Output "[worker] repository path contains a space; staging into $StagingRoot"
-  New-Item -ItemType Directory -Force -Path $StagingRoot | Out-Null
-  if ($StagingRoot -match " ") {
-    throw "Staging root must not contain a space: $StagingRoot"
-  }
-  Copy-Item -LiteralPath (Join-Path $source "Cargo.toml") -Destination $StagingRoot -Force
-  $lock = Join-Path $source "Cargo.lock"
-  if (Test-Path -LiteralPath $lock) {
-    Copy-Item -LiteralPath $lock -Destination $StagingRoot -Force
-  }
-  Copy-Item -LiteralPath (Join-Path $source "src") -Destination $StagingRoot -Recurse -Force
-  $manifest = Join-Path $StagingRoot "Cargo.toml"
-  $built = Join-Path $StagingRoot "target\release\wigigadict-asr-benchmark.exe"
+if (-not [System.IO.Path]::IsPathFullyQualified($StagingRoot) -or $StagingRoot -match " ") {
+  throw "Staging root must be an absolute path without spaces: $StagingRoot"
 }
-else {
-  Write-Output "[worker] repository path is space-free; building in place"
-  $manifest = Join-Path $source "Cargo.toml"
-  $built = Join-Path $source "target\release\wigigadict-asr-benchmark.exe"
+if ($StagingRoot.Length -gt 20) {
+  throw "Staging root must be at most 20 characters because nested CMake paths approach the Windows limit: $StagingRoot"
 }
 
-cargo build --manifest-path $manifest --release --features whisper-vulkan --locked
+Write-Output "[worker] staging into short build root $StagingRoot"
+New-Item -ItemType Directory -Force -Path $StagingRoot | Out-Null
+Copy-Item -LiteralPath (Join-Path $source "Cargo.toml") -Destination $StagingRoot -Force
+$lock = Join-Path $source "Cargo.lock"
+if (Test-Path -LiteralPath $lock) {
+  Copy-Item -LiteralPath $lock -Destination $StagingRoot -Force
+}
+Copy-Item -LiteralPath (Join-Path $source "src") -Destination $StagingRoot -Recurse -Force
+$manifest = Join-Path $StagingRoot "Cargo.toml"
+$built = Join-Path $StagingRoot "target\release\wigigadict-asr-benchmark.exe"
+
+$previousPath = $env:Path
+$ninja = Get-Command ninja.exe -ErrorAction SilentlyContinue
+if (-not $ninja) {
+  $ninjaCandidates = @("C:\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\Ninja\ninja.exe")
+  if ($env:VSINSTALLDIR) {
+    $ninjaCandidates = @(
+      (Join-Path $env:VSINSTALLDIR "Common7\IDE\CommonExtensions\Microsoft\CMake\Ninja\ninja.exe")
+    ) + $ninjaCandidates
+  }
+  $ninjaPath = $ninjaCandidates | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
+  if (-not $ninjaPath) {
+    throw "ninja.exe was not found. Install Visual Studio 2022 Build Tools with the C++ CMake tools."
+  }
+  $env:Path = "$(Split-Path -Parent $ninjaPath);$env:Path"
+}
+$hadCmakeGenerator = Test-Path Env:CMAKE_GENERATOR
+$previousCmakeGenerator = $env:CMAKE_GENERATOR
+try {
+  $env:CMAKE_GENERATOR = "Ninja"
+  cargo build --manifest-path $manifest --release --features whisper-vulkan --locked
+}
+finally {
+  if ($hadCmakeGenerator) {
+    $env:CMAKE_GENERATOR = $previousCmakeGenerator
+  }
+  else {
+    Remove-Item Env:CMAKE_GENERATOR -ErrorAction SilentlyContinue
+  }
+  $env:Path = $previousPath
+}
 
 if (-not (Test-Path -LiteralPath $built)) {
   throw "Worker binary was not produced at $built."

@@ -45,7 +45,7 @@ pwsh -NoProfile -File .\scripts\install-release.ps1 -DownloadOnly
 
 ```powershell
 pwsh -NoProfile -File .\scripts\install-release.ps1 `
-  -Version v0.0.2 `
+  -Version v0.0.3 `
   -DestinationDirectory "$env:USERPROFILE\Downloads"
 ```
 
