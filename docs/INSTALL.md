@@ -1,6 +1,6 @@
 # Установка WiGigaDict на Windows
 
-Поддерживаемая платформа: Windows 10 22H2 x64 и Windows 11 x64. Приложение устанавливается для текущего пользователя и не требует прав администратора.
+Целевая платформа: Windows 10 22H2 x64 и Windows 11 x64. Это personal alpha: полная матрица чистой установки и совместимости Windows 10/11 ещё не завершена. Приложение устанавливается для текущего пользователя и не требует прав администратора.
 
 ## 1. Обычная установка из GitHub Releases
 
@@ -61,7 +61,8 @@ GitHub автоматически прикладывает к каждому р�
 4. Выполните:
 
 ```powershell
-pwsh -NoProfile -File .\scripts\build.ps1
+& .\scripts\install-vulkan-sdk.ps1
+& .\scripts\build.ps1
 ```
 
 Готовый installer появится в `target\release\bundle\nsis`.
@@ -71,7 +72,8 @@ pwsh -NoProfile -File .\scripts\build.ps1
 ```powershell
 git clone https://github.com/nakarandashe27/WiGigaDict.git
 Set-Location .\WiGigaDict
-pwsh -NoProfile -File .\scripts\build.ps1
+& .\scripts\install-vulkan-sdk.ps1
+& .\scripts\build.ps1
 ```
 
 Для запуска development-версии используйте:
@@ -83,12 +85,14 @@ pwsh -NoProfile -File .\scripts\dev.ps1
 ### Требования для сборки
 
 - Git и PowerShell 7;
-- Visual Studio Build Tools 2022 с MSVC v143 и Windows 11 SDK 22621;
+- Visual Studio Build Tools 2022 с MSVC v143, Windows 11 SDK 22621 и C++ CMake tools (Ninja);
 - Rust MSVC toolchain (точная версия закреплена в `rust-toolchain.toml`);
 - Node.js 24.16.0 и npm 11.9.0;
-- доступ к сети для npm crates, Vulkan SDK и моделей.
+- доступ к сети для npm-пакетов, Rust crates и Vulkan SDK; модели скачиваются отдельно после установки приложения.
 
-Скрипт сборки сам ставит закреплённый Vulkan SDK, собирает frontend, Rust desktop, ASR sidecar и GPU worker, затем создаёт NSIS installer. Веса моделей в installer не входят.
+Запускайте обе команды в одной PowerShell 7-сессии: `install-vulkan-sdk.ps1` устанавливает закреплённый SDK и задаёт `VULKAN_SDK` для текущего процесса. Загрузка SDK занимает около 288 МБ, установка — около 1,7 ГБ; helper использует автоматическое принятие лицензий SDK. Ознакомьтесь с условиями SDK до запуска helper. Если SDK уже установлен, можно вместо helper задать `$env:VULKAN_SDK = 'C:\VulkanSDK\1.4.357.0'`.
+
+`build.ps1` собирает frontend, Rust desktop, ASR sidecar и GPU worker, затем создаёт NSIS installer. Сборка worker использует короткую локальную папку `C:\wgd`: нужны права записи в неё и место под build-кэш. Веса моделей в installer не входят.
 
 ## Первый запуск
 

@@ -75,17 +75,20 @@
 
 - Windows 10 22H2 x64 или Windows 11 x64;
 - Rust `1.97.1-x86_64-pc-windows-msvc` из `rust-toolchain.toml`;
-- Visual Studio Build Tools 2022: MSVC v143 и Windows 11 SDK 22621;
+- Visual Studio Build Tools 2022: MSVC v143, Windows 11 SDK 22621 и C++ CMake tools (Ninja);
 - Node.js `24.16.0`, npm `11.9.0`;
 - Vulkan SDK `1.4.357.0` для сборки GPU worker (скрипт проверяет размер и SHA-256).
 
 ```powershell
 git clone https://github.com/nakarandashe27/WiGigaDict.git
 Set-Location .\WiGigaDict
-pwsh -NoProfile -File .\scripts\dev.ps1
+& .\scripts\install-vulkan-sdk.ps1
+& .\scripts\dev.ps1
 ```
 
 Release-сборка и NSIS installer:
+
+Команды выполняются в PowerShell 7. Подготовка Vulkan SDK задаёт `VULKAN_SDK` в текущей сессии; требования и условия установки SDK описаны в [инструкции ручной сборки](docs/INSTALL.md#требования-для-сборки).
 
 ```powershell
 pwsh -NoProfile -File .\scripts\build.ps1
