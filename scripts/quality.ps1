@@ -28,8 +28,18 @@ try {
   cargo build --package wigigadict-asr-sidecar --locked
   & (Join-Path $PSScriptRoot "prepare-sidecar.ps1") -Profile debug
   & (Join-Path $PSScriptRoot "prepare-worker.ps1")
-  Write-QualityStage "rust clippy"
-  cargo clippy --workspace --all-targets --all-features --locked -- -D warnings
+  $clippyPackages = @(
+    "wigigadict-protocol",
+    "wigigadict-storage",
+    "wigigadict-test-support",
+    "wigigadict-asr-sidecar",
+    "wigigadict-win32-spike",
+    "wigigadict-desktop"
+  )
+  foreach ($package in $clippyPackages) {
+    Write-QualityStage "rust clippy: $package"
+    cargo clippy --package $package --all-targets --all-features --locked -- -D warnings
+  }
   Write-QualityStage "rust unit/integration/fault tests"
   cargo test --workspace --all-targets --all-features --locked
 

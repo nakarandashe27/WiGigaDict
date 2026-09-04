@@ -46,15 +46,15 @@ jobs:
         shell: pwsh
         run: ./scripts/install-vulkan-sdk.ps1
 
+      - name: Run quality and contract gates
+        shell: pwsh
+        run: ./scripts/quality.ps1 -SkipNpmCi
+
       - name: Install exact supply-chain tools
         shell: pwsh
         run: |
           cargo install cargo-deny --version 0.20.2 --locked
           cargo install cargo-cyclonedx --version 0.5.9 --locked
-
-      - name: Run quality and contract gates
-        shell: pwsh
-        run: ./scripts/quality.ps1 -SkipNpmCi
 
       - name: Generate and verify supply-chain reports
         shell: pwsh
