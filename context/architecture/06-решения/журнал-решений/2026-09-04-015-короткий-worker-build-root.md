@@ -18,6 +18,7 @@
 - Собирать и размещать sidecar и worker до первой компиляции Tauri desktop.
 - Создавать `apps/desktop/dist` до первой компиляции Tauri desktop: `tauri::generate_context!` проверяет `frontendDist` даже при обычных `cargo clippy` и `cargo build`.
 - В self-contained quality gate готовить bundle inputs до clippy и тестов, чтобы чистый checkout не зависел от ignored артефактов.
+- На hosted Windows CI отключать Cargo incremental/debug symbols для dev/test и очищать проверенный `target` перед отдельной release-сборкой: локальный полный debug target измеренно превышает 29 ГБ и не помещается в runner вместе с release artifacts.
 
 ## Последствия
 

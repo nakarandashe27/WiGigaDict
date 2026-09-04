@@ -17,6 +17,12 @@ jobs:
     name: Windows 2025 / locked toolchain
     runs-on: windows-2025
     timeout-minutes: 60
+    env:
+      # A full Windows debug workspace with Tauri staticlib/cdylib outputs exceeds the hosted
+      # runner disk. CI needs diagnostics from test output, not multi-gigabyte PDB/incremental data.
+      CARGO_INCREMENTAL: "0"
+      CARGO_PROFILE_DEV_DEBUG: "0"
+      CARGO_PROFILE_TEST_DEBUG: "0"
 
     steps:
       - name: Checkout
@@ -59,6 +65,10 @@ jobs:
       - name: Generate and verify supply-chain reports
         shell: pwsh
         run: ./scripts/supply-chain.ps1
+
+      - name: Reclaim verified debug artifacts before release build
+        shell: pwsh
+        run: cargo clean
 
       - name: Build unsigned internal NSIS artifact
         shell: pwsh
