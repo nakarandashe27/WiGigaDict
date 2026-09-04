@@ -25,7 +25,7 @@ try {
   & (Join-Path $repoRoot "scripts\prepare-worker.ps1")
   cargo build --package wigigadict-desktop --locked --release
   npm run tauri:build --prefix apps/desktop
-  Write-Output "[build] completed: v0.0.3-dev"
+  Write-Output "[build] completed: v0.0.4-dev"
 }
 finally {
   Stop-Transcript | Out-Null

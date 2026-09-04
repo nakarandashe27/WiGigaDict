@@ -1,6 +1,6 @@
 name: Release
 
-# Тег вида v0.0.3 собирает установщик и публикует релиз с активами.
+# Тег вида v0.0.4 собирает установщик и публикует релиз с активами.
 # Каталог моделей выкладывается тем же релизом: приложение получает стабильный адрес,
 # по которому его можно обновить, а подпись проверяется вшитым в сборку публичным ключом.
 on:
@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: "Existing version tag to publish (for example v0.0.3)"
+        description: "Existing version tag to publish (for example v0.0.4)"
         required: true
         type: string
 
