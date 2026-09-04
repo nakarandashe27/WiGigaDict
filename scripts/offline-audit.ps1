@@ -69,7 +69,7 @@ try {
   # заворачивает каждую строку stderr нативной команды в ErrorRecord, и на Stop обычное
   # cargo "Compiling ..." роняет шаг. Настоящая проверка — $LASTEXITCODE сразу ниже.
   $ErrorActionPreference = "Continue"
-  $auditOutput = & cargo test -p wigigadict-storage --test diagnostics --test recovery --locked 2>&1
+  $auditOutput = & cmd.exe /d /s /c "cargo test -p wigigadict-storage --test diagnostics --test recovery --locked 2>&1"
   $ErrorActionPreference = $previousErrorAction
   if ($LASTEXITCODE -ne 0) {
     foreach ($line in @($auditOutput)) {

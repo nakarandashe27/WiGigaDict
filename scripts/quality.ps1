@@ -54,7 +54,7 @@ try {
   try {
     $PSNativeCommandUseErrorActionPreference = $false
     $ErrorActionPreference = "Continue"
-    $desktopBinOutput = & cargo clippy --package wigigadict-desktop --bin wigigadict-desktop --all-features --locked -- -D warnings 2>&1
+    $desktopBinOutput = & cmd.exe /d /s /c "cargo clippy --package wigigadict-desktop --bin wigigadict-desktop --all-features --locked -- -D warnings 2>&1"
     $desktopBinExitCode = $LASTEXITCODE
   }
   finally {
