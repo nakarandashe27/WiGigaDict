@@ -1,6 +1,6 @@
 [package]
 name = "wigigadict-desktop"
-version = "0.0.1"
+version = "0.0.2"
 description = "WiGigaDict local Windows shell"
 authors = ["WiGigaDict"]
 license = "MIT"

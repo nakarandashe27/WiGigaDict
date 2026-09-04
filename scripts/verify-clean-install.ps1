@@ -16,7 +16,7 @@
 
 .EXAMPLE
   powershell -NoProfile -ExecutionPolicy Bypass -File .\verify-clean-install.ps1 `
-    -Installer .\WiGigaDict_0.0.1_x64-setup.exe -ModelPath .\ggml-base.bin
+    -Installer .\WiGigaDict_0.0.2_x64-setup.exe -ModelPath .\ggml-base.bin
 #>
 param(
   [string]$Installer,

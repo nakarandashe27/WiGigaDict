@@ -15,6 +15,10 @@ try {
 
   Write-Output "[quality] rust format"
   cargo fmt --all -- --check
+  Write-Output "[quality] prepare clean-checkout bundle inputs"
+  cargo build --package wigigadict-asr-sidecar --locked
+  & (Join-Path $PSScriptRoot "prepare-sidecar.ps1") -Profile debug
+  & (Join-Path $PSScriptRoot "prepare-worker.ps1")
   Write-Output "[quality] rust clippy"
   cargo clippy --workspace --all-targets --all-features --locked -- -D warnings
   Write-Output "[quality] rust unit/integration/fault tests"

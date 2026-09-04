@@ -19,10 +19,10 @@ try {
   & (Join-Path $repoRoot "scripts\create-icon.ps1")
   cargo build --package wigigadict-asr-sidecar --locked --release
   & (Join-Path $repoRoot "scripts\prepare-sidecar.ps1") -Profile release
-  cargo build --package wigigadict-desktop --locked --release
   & (Join-Path $repoRoot "scripts\prepare-worker.ps1")
+  cargo build --package wigigadict-desktop --locked --release
   npm run tauri:build --prefix apps/desktop
-  Write-Output "[build] completed: v0.0.1-dev"
+  Write-Output "[build] completed: v0.0.2-dev"
 }
 finally {
   Stop-Transcript | Out-Null
