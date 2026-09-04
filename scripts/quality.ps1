@@ -61,7 +61,9 @@ try {
     $PSNativeCommandUseErrorActionPreference = $nativePreference
     $ErrorActionPreference = $errorPreference
   }
-  $desktopBinOutput | Write-Output
+  foreach ($line in $desktopBinOutput) {
+    Write-Output $line.ToString()
+  }
   if ($desktopBinExitCode -ne 0) {
     $desktopBinText = $desktopBinOutput -join [Environment]::NewLine
     $category = if ($desktopBinText -match '(?i)(frontendDist|frontend dist)') {

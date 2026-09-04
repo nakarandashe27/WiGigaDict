@@ -72,14 +72,18 @@ try {
   $auditOutput = & cargo test -p wigigadict-storage --test diagnostics --test recovery --locked 2>&1
   $ErrorActionPreference = $previousErrorAction
   if ($LASTEXITCODE -ne 0) {
-    $auditOutput | Write-Output
+    foreach ($line in $auditOutput) {
+      Write-Output $line.ToString()
+    }
     throw "Offline local-flow tests failed"
   }
   $auditText = $auditOutput -join [Environment]::NewLine
   if ($auditText.IndexOf($marker, [StringComparison]::Ordinal) -ge 0) {
     throw "Marker secret leaked into offline audit output"
   }
-  $auditOutput | Write-Output
+  foreach ($line in $auditOutput) {
+    Write-Output $line.ToString()
+  }
 }
 finally {
   $ErrorActionPreference = $previousErrorAction
