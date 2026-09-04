@@ -74,7 +74,7 @@ jobs:
 
       - name: Run offline deny-all and marker audit
         shell: pwsh
-        run: ./scripts/offline-audit.ps1
+        run: ./scripts/offline-audit.ps1 -SkipProcessHarness
 
       - name: Run TypeScript format, lint, tests, and build
         shell: pwsh

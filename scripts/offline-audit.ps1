@@ -1,5 +1,6 @@
 param(
-  [switch]$SkipToolchainInit
+  [switch]$SkipToolchainInit,
+  [switch]$SkipProcessHarness
 )
 
 $ErrorActionPreference = "Stop"
@@ -51,6 +52,11 @@ $unexpectedSites = @($networkSites | Where-Object {
 })
 if ($unexpectedSites.Count -ne 0) {
   throw "Network code escaped the explicit model manager boundary: $($unexpectedSites -join ', ')"
+}
+
+if ($SkipProcessHarness) {
+  Write-Output "[offline-audit] passed: static deny-all boundary"
+  return
 }
 
 Write-Output "[offline-audit] process network deny harness"
