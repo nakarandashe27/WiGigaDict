@@ -1,5 +1,6 @@
 param(
-  [switch]$SkipNpmCi
+  [switch]$SkipNpmCi,
+  [switch]$SkipRustTests
 )
 
 $ErrorActionPreference = "Stop"
@@ -57,8 +58,10 @@ try {
     Write-QualityStage "rust clippy: wigigadict-desktop tests"
     cargo clippy --package wigigadict-desktop --tests --all-features --locked -- -D warnings
   }
-  Write-QualityStage "rust unit/integration/fault tests"
-  cargo test --workspace --all-targets --all-features --locked
+  if (-not $SkipRustTests) {
+    Write-QualityStage "rust unit/integration/fault tests"
+    cargo test --workspace --all-targets --all-features --locked
+  }
 
   Write-QualityStage "golden-flow frozen threshold contract"
   & (Join-Path $PSScriptRoot "golden-flow.ps1") -CheckThresholdsOnly -SkipToolchainInit

@@ -54,7 +54,15 @@ jobs:
 
       - name: Run quality and contract gates
         shell: pwsh
-        run: ./scripts/quality.ps1 -SkipNpmCi
+        run: ./scripts/quality.ps1 -SkipNpmCi -SkipRustTests
+
+      - name: Reclaim Clippy artifacts before Rust tests
+        shell: pwsh
+        run: cargo clean
+
+      - name: Run Rust unit, integration, and fault tests
+        shell: pwsh
+        run: cargo test --workspace --all-targets --all-features --locked
 
       - name: Install exact supply-chain tools
         shell: pwsh
