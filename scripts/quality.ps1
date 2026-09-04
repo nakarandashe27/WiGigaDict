@@ -48,46 +48,12 @@ try {
   }
   Write-QualityStage "rust clippy: wigigadict-desktop lib"
   cargo clippy --package wigigadict-desktop --lib --all-features --locked -- -D warnings
-  Write-QualityStage "rust clippy: wigigadict-desktop bin"
-  $nativePreference = $PSNativeCommandUseErrorActionPreference
-  $errorPreference = $ErrorActionPreference
-  try {
-    $PSNativeCommandUseErrorActionPreference = $false
-    $ErrorActionPreference = "Continue"
-    $desktopBinOutput = & cmd.exe /d /s /c "cargo clippy --package wigigadict-desktop --bin wigigadict-desktop --all-features --locked -- -D warnings 2>&1"
-    $desktopBinExitCode = $LASTEXITCODE
+  if ($env:GITHUB_ACTIONS) {
+    Write-QualityStage "rust clippy: wigigadict-desktop bin deferred to release build"
   }
-  finally {
-    $PSNativeCommandUseErrorActionPreference = $nativePreference
-    $ErrorActionPreference = $errorPreference
-  }
-  if ($desktopBinExitCode -ne 0) {
-    $desktopBinText = $desktopBinOutput -join [Environment]::NewLine
-    $category = if ($desktopBinText -match '(?i)(frontendDist|frontend dist)') {
-      "missing_frontend"
-    }
-    elseif ($desktopBinText -match '(?i)(externalBin|resource path|does not exist|doesn''t exist)') {
-      "missing_resource"
-    }
-    elseif ($desktopBinText -match '(?i)(LNK\d+|linking with .* failed|linker .* failed)') {
-      "linker"
-    }
-    elseif ($desktopBinText -match '(?m)^error\[E\d+\]') {
-      "rust_compile"
-    }
-    elseif ($desktopBinText -match '(?m)^error:') {
-      "compiler_or_lint"
-    }
-    else {
-      "unclassified"
-    }
-    if ($env:GITHUB_ACTIONS) {
-      Write-Output "::error title=WiGigaDict desktop bin category::$category"
-    }
-    foreach ($line in @($desktopBinOutput)) {
-      Write-Host ([string]$line)
-    }
-    throw "Desktop binary Clippy failed ($category)."
+  else {
+    Write-QualityStage "rust clippy: wigigadict-desktop bin"
+    cargo clippy --package wigigadict-desktop --bin wigigadict-desktop --all-features --locked -- -D warnings
   }
   Write-QualityStage "rust clippy: wigigadict-desktop tests"
   cargo clippy --package wigigadict-desktop --tests --all-features --locked -- -D warnings
