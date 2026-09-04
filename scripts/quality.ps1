@@ -33,13 +33,18 @@ try {
     "wigigadict-storage",
     "wigigadict-test-support",
     "wigigadict-asr-sidecar",
-    "wigigadict-win32-spike",
-    "wigigadict-desktop"
+    "wigigadict-win32-spike"
   )
   foreach ($package in $clippyPackages) {
     Write-QualityStage "rust clippy: $package"
     cargo clippy --package $package --all-targets --all-features --locked -- -D warnings
   }
+  Write-QualityStage "rust clippy: wigigadict-desktop lib"
+  cargo clippy --package wigigadict-desktop --lib --all-features --locked -- -D warnings
+  Write-QualityStage "rust clippy: wigigadict-desktop bin"
+  cargo clippy --package wigigadict-desktop --bin wigigadict-desktop --all-features --locked -- -D warnings
+  Write-QualityStage "rust clippy: wigigadict-desktop tests"
+  cargo clippy --package wigigadict-desktop --tests --all-features --locked -- -D warnings
   Write-QualityStage "rust unit/integration/fault tests"
   cargo test --workspace --all-targets --all-features --locked
 
